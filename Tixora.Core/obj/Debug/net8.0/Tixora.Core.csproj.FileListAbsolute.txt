@@ -1,0 +1,12 @@
+C:\Tixora\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.deps.json
+C:\Tixora\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.dll
+C:\Tixora\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.pdb
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.csproj.AssemblyReference.cache
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.AssemblyInfoInputs.cache
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.AssemblyInfo.cs
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.dll
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\refint\Tixora.Core.dll
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.pdb
+C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\ref\Tixora.Core.dll

@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "V53SmBRVTJFFEPGbdzVwJiff9QhLMFzj7qa2Na6Gd5I=",
+  "Source": "Tixora.API",
+  "BasePath": "_content/Tixora.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

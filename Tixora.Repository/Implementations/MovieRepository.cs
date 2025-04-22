@@ -1,0 +1,61 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tixora.Core.Context;
+using Tixora.Core.Entities;
+using Tixora.Repository.Interfaces;
+
+namespace Tixora.Repository.Implementations
+{
+    public class MovieRepository : IMovieRepository
+    {
+        private readonly AppDbContext _context;
+
+        public MovieRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<TbMovie> AddAsync(TbMovie movie)
+        {
+            await _context.TbMovies.AddAsync(movie);
+            await _context.SaveChangesAsync();
+            return movie;
+        }
+
+        public async Task<TbMovie> GetByIdAsync(int id)
+        {
+            return await _context.TbMovies.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<TbMovie>> GetAllAsync()
+        {
+            return await _context.TbMovies.ToListAsync();
+        }
+
+        public async Task<IEnumerable<TbMovie>> GetAllActiveAsync()
+        {
+            return await _context.TbMovies.Where(m => m.IsActive == true).ToListAsync();
+        }
+
+        public async Task<TbMovie> UpdateAsync(TbMovie movie)
+        {
+            _context.TbMovies.Update(movie);
+            await _context.SaveChangesAsync();
+            return movie;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var movie = await _context.TbMovies.FindAsync(id);
+            if (movie == null) return false;
+
+            _context.TbMovies.Remove(movie);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+    }
+}
