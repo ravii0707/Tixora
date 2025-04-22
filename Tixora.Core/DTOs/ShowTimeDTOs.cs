@@ -16,8 +16,10 @@ namespace Tixora.Core.DTOs
         [Required(ErrorMessage = "Show date is required")]
         public DateOnly ShowDate { get; set; }
 
-        [Required]
-        public List<TimeOnly> ShowTime { get; set; }
+        [Required(ErrorMessage = "Show time is required")]
+        [RegularExpression(@"^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+        ErrorMessage = "Time must be in HH:mm 24-hour format (e.g., '13:30')")]
+        public string ShowTime { get; set; } = null!;
 
         [Range(1, 500, ErrorMessage = "Available seats must be between 1 and 500")]
         public int AvailableSeats { get; set; }
@@ -31,7 +33,7 @@ namespace Tixora.Core.DTOs
         public int MovieId { get; set; }
         public required string MovieTitle { get; set; }
         public DateOnly ShowDate { get; set; }
-        public required List<string> ShowTime { get; set; }
+        public string ShowTime { get; set; } = null!;
         public bool IsActive { get; set; }
         public int AvailableSeats { get; set; }
     }

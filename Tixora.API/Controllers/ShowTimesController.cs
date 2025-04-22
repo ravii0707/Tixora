@@ -34,11 +34,26 @@ public class ShowTimesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(int movieId, [FromBody] ShowTimeCreateDTO showTimeDto)
+    public async Task<IActionResult> Create(
+    int movieId,
+    [FromBody] ShowTimeCreateDTO showTimeDto)
     {
-        showTimeDto.MovieId = movieId;
-        var showTime = await _showTimeService.CreateAsync(showTimeDto);
-        return CreatedAtAction(nameof(GetById), new { movieId, id = showTime.ShowtimeId }, showTime);
+        try
+        {
+            showTimeDto.MovieId = movieId; // Ensure movieId matches route
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _showTimeService.CreateAsync(showTimeDto);
+            return CreatedAtAction(nameof(GetById),
+                new { movieId, id = result.ShowtimeId },
+                result);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
     }
 
     [HttpPut("{id}")]

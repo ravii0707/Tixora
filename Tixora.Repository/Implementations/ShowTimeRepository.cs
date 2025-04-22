@@ -23,11 +23,9 @@ namespace Tixora.Repository.Implementations
         public async Task<TbShowTime> AddAsync(TbShowTime showTime)
         {
             // Validate the string format before saving
-            if (string.IsNullOrWhiteSpace(showTime.ShowTime) ||
-                !IsValidShowTimeString(showTime.ShowTime))
+            if (!TimeOnly.TryParse(showTime.ShowTime, out _))
             {
-                throw new ArgumentException(
-                    "ShowTime must contain 4 valid times in HH:mm format separated by pipes (e.g., '10:00|13:30|18:00|21:30')");
+                throw new ArgumentException("Invalid time format. Use HH:mm");
             }
 
             await _context.TbShowTimes.AddAsync(showTime);
@@ -37,11 +35,11 @@ namespace Tixora.Repository.Implementations
         public async Task<TbShowTime> UpdateAsync(TbShowTime showTime)
         {
             // Same validation for updates
-            if (string.IsNullOrWhiteSpace(showTime.ShowTime) ||
-                !IsValidShowTimeString(showTime.ShowTime))
-            {
-                throw new ArgumentException("Invalid ShowTime format");
-            }
+            //if (string.IsNullOrWhiteSpace(showTime.ShowTime) ||
+            //    !IsValidShowTimeString(showTime.ShowTime))
+            //{
+            //    throw new ArgumentException("Invalid ShowTime format");
+            //}
 
             _context.TbShowTimes.Update(showTime);
             await _context.SaveChangesAsync();
