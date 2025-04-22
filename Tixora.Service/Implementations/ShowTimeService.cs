@@ -28,16 +28,39 @@ namespace Tixora.Service.Implementations
             _mapper = mapper;
         }
 
+        //public async Task<ShowTimeResponseDTO> CreateAsync(ShowTimeCreateDTO showTimeDto)
+        //{
+        //    //var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId);
+        //    //if (movie == null)
+        //    //{
+        //    //    throw new NotFoundException("Movie not found");
+        //    //}
+
+        //    var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId);
+        //    if (movie == null)
+        //    {
+        //        throw new NotFoundException("Movie not found");
+        //    }
+
+        //    var showTime = _mapper.Map<TbShowTime>(showTimeDto);
+        //    var createdShowTime = await _showTimeRepository.AddAsync(showTime);
+
+        //    return _mapper.Map<ShowTimeResponseDTO>(createdShowTime);
+        //}
+
         public async Task<ShowTimeResponseDTO> CreateAsync(ShowTimeCreateDTO showTimeDto)
         {
+            // Validate movie exists
             var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId);
             if (movie == null)
             {
                 throw new NotFoundException("Movie not found");
             }
 
+            // Mapping will handle the string format
             var showTime = _mapper.Map<TbShowTime>(showTimeDto);
             var createdShowTime = await _showTimeRepository.AddAsync(showTime);
+
             return _mapper.Map<ShowTimeResponseDTO>(createdShowTime);
         }
 

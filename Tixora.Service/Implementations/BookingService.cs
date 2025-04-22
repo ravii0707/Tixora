@@ -77,6 +77,7 @@ namespace Tixora.Service.Implementations
 
             // Create booking
             var booking = _mapper.Map<TbBookingHistory>(bookingDto);
+            booking.TotalAmount = bookingDto.TicketCount * 200;
             var createdBooking = await _bookingRepository.AddAsync(booking);
 
             // Update available seats

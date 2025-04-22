@@ -8,6 +8,7 @@ C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.GeneratedM
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.AssemblyInfoInputs.cache
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.AssemblyInfo.cs
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.sourcelink.json
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.R.30909C42.Up2Date
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\Tixora.Repository.dll
 C:\Tixora\Tixora\Tixora.Repository\obj\Debug\net8.0\refint\Tixora.Repository.dll

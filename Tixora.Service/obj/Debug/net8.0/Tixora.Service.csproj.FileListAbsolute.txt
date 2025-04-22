@@ -10,6 +10,7 @@ C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.GeneratedMSBuild
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfoInputs.cache
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfo.cs
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.sourcelink.json
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.S.58A48AE8.Up2Date
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.dll
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\refint\Tixora.Service.dll

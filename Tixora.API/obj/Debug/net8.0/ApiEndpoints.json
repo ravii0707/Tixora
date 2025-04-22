@@ -137,6 +137,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Tixora.API.Controllers.MoviesController",
+    "Method": "ToggleStatus",
+    "RelativePath": "api/movies/{id}/toggle-status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "isActive",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Tixora.API.Controllers.ShowTimesController",
     "Method": "GetByMovieId",
     "RelativePath": "api/movies/{movieId}/showtimes",
@@ -182,13 +203,13 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "id",
+        "Name": "movieId",
         "Type": "System.Int32",
         "IsRequired": true
       },
       {
-        "Name": "movieId",
-        "Type": "",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

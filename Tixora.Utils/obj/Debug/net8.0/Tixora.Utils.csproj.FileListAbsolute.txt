@@ -7,6 +7,7 @@ C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.GeneratedMSBuildEdit
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.AssemblyInfoInputs.cache
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.AssemblyInfo.cs
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.sourcelink.json
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.dll
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\refint\Tixora.Utils.dll
 C:\Tixora\Tixora\Tixora.Utils\obj\Debug\net8.0\Tixora.Utils.pdb

@@ -46,7 +46,7 @@ public partial class TbMovie
     [StringLength(1255)]
     public string? PosterUrl { get; set; }
 
-    public bool? IsActive { get; set; }
+    public bool IsActive { get; set; } = true;
 
     [InverseProperty("Movie")]
     public virtual ICollection<TbBookingHistory> TbBookingHistories { get; set; } = new List<TbBookingHistory>();

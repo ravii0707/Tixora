@@ -19,18 +19,78 @@ namespace Tixora.Repository.Implementations
             _context = context;
         }
 
+
         public async Task<TbShowTime> AddAsync(TbShowTime showTime)
         {
+            // Validate the string format before saving
+            if (string.IsNullOrWhiteSpace(showTime.ShowTime) ||
+                !IsValidShowTimeString(showTime.ShowTime))
+            {
+                throw new ArgumentException(
+                    "ShowTime must contain 4 valid times in HH:mm format separated by pipes (e.g., '10:00|13:30|18:00|21:30')");
+            }
+
             await _context.TbShowTimes.AddAsync(showTime);
             await _context.SaveChangesAsync();
             return showTime;
         }
+        public async Task<TbShowTime> UpdateAsync(TbShowTime showTime)
+        {
+            // Same validation for updates
+            if (string.IsNullOrWhiteSpace(showTime.ShowTime) ||
+                !IsValidShowTimeString(showTime.ShowTime))
+            {
+                throw new ArgumentException("Invalid ShowTime format");
+            }
+
+            _context.TbShowTimes.Update(showTime);
+            await _context.SaveChangesAsync();
+            return showTime;
+        }
+
+        private bool IsValidShowTimeString(string showTime)
+        {
+            if (string.IsNullOrWhiteSpace(showTime))
+                return false;
+
+            var times = showTime.Split('|');
+            if (times.Length != 4)
+                return false;
+
+            foreach (var timeStr in times)
+            {
+                if (!TimeOnly.TryParse(timeStr, out _))
+                    return false;
+            }
+
+            return true;
+        }
+
+        //private bool IsValidShowTimeFormat(string showTime)
+        //{
+        //    if (string.IsNullOrWhiteSpace(showTime))
+        //        return false;
+
+        //    var times = showTime.Split('|');
+        //    if (times.Length != 4)
+        //        return false;
+
+        //    foreach (var timeStr in times)
+        //    {
+        //        if (!TimeOnly.TryParse(timeStr, out _))
+        //            return false;
+        //    }
+
+        //    return true;
+        //}
+
 
         public async Task<TbShowTime> GetByIdAsync(int id)
         {
-            return await _context.TbShowTimes.FindAsync(id);
+            return await _context.TbShowTimes
+                .Include(st => st.Movie)
+                .FirstOrDefaultAsync(st => st.ShowtimeId == id);
         }
-
         public async Task<IEnumerable<TbShowTime>> GetAllAsync()
         {
             return await _context.TbShowTimes.Include(st => st.Movie).ToListAsync();
@@ -44,11 +104,6 @@ namespace Tixora.Repository.Implementations
                 .ToListAsync();
         }
 
-        public async Task<TbShowTime> UpdateAsync(TbShowTime showTime)
-        {
-            _context.TbShowTimes.Update(showTime);
-            await _context.SaveChangesAsync();
-            return showTime;
-        }
+
     }
 }

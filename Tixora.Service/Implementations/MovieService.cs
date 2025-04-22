@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,21 @@ using Tixora.Repository.Interfaces;
 using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
 
+using Tixora.Core.Context;
+
 namespace Tixora.Service.Implementations
 {
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
+        private readonly AppDbContext _context;
 
-        public MovieService(IMovieRepository movieRepository, IMapper mapper)
+        public MovieService(IMovieRepository movieRepository, IMapper mapper, AppDbContext context)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
+            _context = context;
         }
 
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
@@ -69,6 +74,20 @@ namespace Tixora.Service.Implementations
         public async Task<bool> DeleteAsync(int id)
         {
             return await _movieRepository.DeleteAsync(id);
+        }
+        public async Task ToggleMovieStatusAsync(int movieId, bool isActive)
+        {
+            var movie = await _context.TbMovies.FindAsync(movieId);
+            if (movie == null)
+            {
+                throw new NotFoundException("Movie not found.");
+            }
+
+            // Just mark the movie as active/inactive (without affecting ShowTimes)
+            movie.IsActive = isActive;
+
+            // Save changes
+            await _context.SaveChangesAsync();
         }
     }
 }

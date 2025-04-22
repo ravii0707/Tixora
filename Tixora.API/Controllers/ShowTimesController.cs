@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.DTOs;
-using Tixora.Service;
 using Tixora.Service.Interfaces;
 
 namespace Tixora.API.Controllers;
@@ -24,9 +23,13 @@ public class ShowTimesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(int movieId, int id)
     {
         var showTime = await _showTimeService.GetByIdAsync(id);
+        if (showTime == null || showTime.MovieId != movieId)
+        {
+            return NotFound();
+        }
         return Ok(showTime);
     }
 
@@ -45,4 +48,25 @@ public class ShowTimesController : ControllerBase
         var showTime = await _showTimeService.UpdateAsync(id, showTimeDto);
         return Ok(showTime);
     }
+    //[HttpPost("bulk")]
+    //public async Task<IActionResult> BulkCreate(
+    //       int movieId,
+    //       [FromBody] BulkShowTimeCreateDTO request)
+    //{
+    //    try
+    //    {
+    //        var results = await _showTimeService.BulkCreateAsync(movieId, request);
+    //        return Ok(results);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return BadRequest(ex.Message);
+    //    }
+    //}
+    //public class BulkShowTimeCreateDTO
+    //{
+    //    public DateOnly ShowDate { get; set; }
+    //    public required List<TimeOnly> ShowTimes { get; set; }  // Example: ["10:00", "13:30"]
+    //    public int AvailableSeats { get; set; } = 290;
+    //}
 }

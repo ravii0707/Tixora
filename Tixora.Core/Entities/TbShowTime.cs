@@ -9,16 +9,20 @@ namespace Tixora.Core.Entities;
 [Table("tb_ShowTime")]
 public partial class TbShowTime
 {
+
     [Key]
     [Column("ShowtimeID")]
     public int ShowtimeId { get; set; }
 
     [Column("MovieID")]
     public int MovieId { get; set; }
-
+    [Column(TypeName = "date")]
     public DateOnly ShowDate { get; set; }
 
-    public TimeOnly ShowTime { get; set; }
+    [Required]
+    [StringLength(100)]
+    [Unicode(false)]
+    public required string ShowTime { get; set; }
 
     public bool? IsActive { get; set; }
 

@@ -15,5 +15,6 @@ namespace Tixora.Service.Interfaces
         Task<IEnumerable<MovieResponseDTO>> GetAllActiveAsync();
         Task<MovieResponseDTO> UpdateAsync(int id, MovieCreateDTO movieDto);
         Task<bool> DeleteAsync(int id);
+        Task ToggleMovieStatusAsync(int id, bool isActive);
     }
 }

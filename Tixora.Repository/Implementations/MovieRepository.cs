@@ -57,5 +57,14 @@ namespace Tixora.Repository.Implementations
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task ToggleActiveStatusAsync(int movieId, bool isActive) 
+        {
+            var movie = await GetByIdAsync(movieId);
+            if (movie != null)
+            {
+                movie.IsActive = isActive;
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

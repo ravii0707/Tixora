@@ -18,11 +18,11 @@ namespace Tixora.Core.DTOs
         [Required(ErrorMessage = "Movie ID is required")]
         public int MovieId { get; set; }
 
-        [Range(1, 20, ErrorMessage = "Ticket count must be between 1 and 20")]
+        [Range(1, 6, ErrorMessage = "Ticket count must be between 1 and 6")]
         public int TicketCount { get; set; }
 
-        [Range(0.01, 10000, ErrorMessage = "Total amount must be between 0.01 and 10,000")]
-        public decimal TotalAmount { get; set; }
+        //[Range(0.01, 10000, ErrorMessage = "Total amount must be between 0.01 and 10,000")]
+        //public decimal TotalAmount { get; set; }
     }
 
     public class BookingResponseDTO

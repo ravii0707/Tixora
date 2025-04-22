@@ -231,6 +231,36 @@
         }
       }
     },
+    "/api/movies/{id}/toggle-status": {
+      "patch": {
+        "tags": [
+          "Movies"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "isActive",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/movies/{movieId}/showtimes": {
       "get": {
         "tags": [
@@ -301,7 +331,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "movieId",
             "in": "path",
             "required": true,
             "schema": {
@@ -310,11 +340,12 @@
             }
           },
           {
-            "name": "movieId",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32"
             }
           }
         ],
@@ -534,16 +565,10 @@
             "format": "int32"
           },
           "ticketCount": {
-            "maximum": 20,
+            "maximum": 6,
             "minimum": 1,
             "type": "integer",
             "format": "int32"
-          },
-          "totalAmount": {
-            "maximum": 10000,
-            "minimum": 0.01,
-            "type": "number",
-            "format": "double"
           }
         },
         "additionalProperties": false
@@ -632,8 +657,11 @@
             "format": "date"
           },
           "showTime": {
-            "type": "string",
-            "format": "time"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "time"
+            }
           },
           "availableSeats": {
             "maximum": 500,

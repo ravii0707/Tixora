@@ -57,4 +57,10 @@ public class MoviesController : ControllerBase
         var result = await _movieService.DeleteAsync(id);
         return result ? NoContent() : NotFound();
     }
+    [HttpPatch("{id}/toggle-status")] 
+    public async Task<IActionResult> ToggleStatus(int id, [FromQuery] bool isActive)
+    {
+        await _movieService.ToggleMovieStatusAsync(id, isActive);
+        return Ok($"Movie status updated to {(isActive ? "Active" : "Inactive")}");
+    }
 }
