@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,24 +18,26 @@ namespace Tixora.Core.DTOs
         [StringLength(100, ErrorMessage = "Last name cannot exceed 100 characters")]
         public required string LastName { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email format")]
-        [StringLength(100, ErrorMessage = "Email cannot exceed 100 characters")]
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email format.")]
+        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|gov|co\.uk|in|ca|us|us\.org)$",
+       ErrorMessage = "Email must be in a valid format and contain a known domain.")]
         public required string Email { get; set; }
 
-        [Required(ErrorMessage = "Phone number is required")]
-        [RegularExpression(@"^[0-9]{10,20}$", ErrorMessage = "Invalid phone number")]
+        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be 10 digits.")]
+        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must contain only digits.")]
         public required string Phone { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
-        [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 100 characters")]
+        [Required]
+        [StringLength(100, MinimumLength = 8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$",
+        ErrorMessage = "Password must contain uppercase, lowercase, number, and special character")]
         public required string Password { get; set; }
 
-        // RoleName is not included here as it should default to "user"
+    // RoleName is not included here as it should default to "user"
     }
-
-    public class UserLoginDTO
-    {
+public class UserLoginDTO
+{
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
         public required string Email { get; set; }

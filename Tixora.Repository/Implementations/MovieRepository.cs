@@ -26,7 +26,7 @@ namespace Tixora.Repository.Implementations
             return movie;
         }
 
-        public async Task<TbMovie> GetByIdAsync(int id)
+        public async Task<TbMovie?> GetByIdAsync(int id)
         {
             return await _context.TbMovies.FindAsync(id);
         }

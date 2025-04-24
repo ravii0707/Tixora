@@ -56,7 +56,14 @@ namespace Tixora.Service.Implementations
             {
                 throw new NotFoundException("Movie not found");
             }
+            //to get book available ticket which is ondate and onshow
 
+            if (showTimeDto.ShowDate < DateOnly.FromDateTime(DateTime.Now.Date) ||
+                 (showTimeDto.ShowDate == DateOnly.FromDateTime(DateTime.Now.Date) &&
+                 TimeOnly.Parse(showTimeDto.ShowTime) < TimeOnly.FromDateTime(DateTime.Now)))
+            {
+                throw new BadRequestException("Cannot create showtime for past date or time.");
+            }
             // Mapping will handle the string format
             var showTime = _mapper.Map<TbShowTime>(showTimeDto);
             var createdShowTime = await _showTimeRepository.AddAsync(showTime);

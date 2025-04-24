@@ -26,7 +26,7 @@ namespace Tixora.Repository.Implementations
             return booking;
         }
 
-        public async Task<TbBookingHistory> GetByIdAsync(int id)
+        public async Task<TbBookingHistory?> GetByIdAsync(int id)
         {
             return await _context.TbBookingHistories
                 .Include(b => b.User)

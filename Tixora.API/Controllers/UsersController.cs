@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.DTOs;
 using Tixora.Service;
+using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
 
 namespace Tixora.API.Controllers;
 
-[Route("api/users")]
+[Route("api/role")]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -26,8 +27,21 @@ public class UsersController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] UserLoginDTO loginDto)
     {
-        var user = await _userService.LoginAsync(loginDto);
-        return Ok(user);
+        try
+        {
+            var user = await _userService.LoginAsync(loginDto);
+            return Ok(user);
+        }
+        catch (UnauthorizedException ex)
+        {
+            return Unauthorized(new { message = ex.Message });
+        }
+        catch (Exception ex)
+        {
+            // Log the exception here
+            return StatusCode(500, new { message = "An error occurred during login" });
+        }
+
     }
 
     [HttpGet("{id}")]

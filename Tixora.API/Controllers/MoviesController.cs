@@ -38,6 +38,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPost]
+
     public async Task<IActionResult> Create([FromBody] MovieCreateDTO movieDto)
     {
         var movie = await _movieService.CreateAsync(movieDto);

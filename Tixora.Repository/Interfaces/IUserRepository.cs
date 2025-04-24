@@ -10,9 +10,10 @@ namespace Tixora.Repository.Interfaces
     public interface IUserRepository
     {
         Task<TbUser> AddAsync(TbUser user);
-        Task<TbUser> GetByIdAsync(int id);
-        Task<TbUser> GetByEmailAsync(string email);
+        Task<TbUser?> GetByIdAsync(int id);
+        Task<TbUser?> GetByEmailAsync(string email);
         Task<IEnumerable<TbUser>> GetAllAsync();
         Task<bool> EmailExistsAsync(string email);
+       
     }
 }

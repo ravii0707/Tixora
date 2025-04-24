@@ -27,7 +27,7 @@ namespace Tixora.Service.Implementations
             _mapper = mapper;
             _context = context;
         }
-
+      
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
         {
             var movie = _mapper.Map<TbMovie>(movieDto);

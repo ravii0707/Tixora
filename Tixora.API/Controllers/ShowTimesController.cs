@@ -34,9 +34,7 @@ public class ShowTimesController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(
-    int movieId,
-    [FromBody] ShowTimeCreateDTO showTimeDto)
+    public async Task<IActionResult> Create(int movieId, [FromBody] ShowTimeCreateDTO showTimeDto)
     {
         try
         {

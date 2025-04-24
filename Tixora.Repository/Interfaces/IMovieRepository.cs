@@ -10,7 +10,7 @@ namespace Tixora.Repository.Interfaces
     public interface IMovieRepository
     {
         Task<TbMovie> AddAsync(TbMovie movie);
-        Task<TbMovie> GetByIdAsync(int id);
+        Task<TbMovie?> GetByIdAsync(int id);
         Task<IEnumerable<TbMovie>> GetAllAsync();
         Task<IEnumerable<TbMovie>> GetAllActiveAsync();
         Task<TbMovie> UpdateAsync(TbMovie movie);

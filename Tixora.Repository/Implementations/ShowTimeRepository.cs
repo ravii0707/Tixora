@@ -46,23 +46,23 @@ namespace Tixora.Repository.Implementations
             return showTime;
         }
 
-        private bool IsValidShowTimeString(string showTime)
-        {
-            if (string.IsNullOrWhiteSpace(showTime))
-                return false;
+        //private bool IsValidShowTimeString(string showTime)
+        //{
+        //    if (string.IsNullOrWhiteSpace(showTime))
+        //        return false;
 
-            var times = showTime.Split('|');
-            if (times.Length != 4)
-                return false;
+        //    var times = showTime.Split('|');
+        //    if (times.Length != 4)
+        //        return false;
 
-            foreach (var timeStr in times)
-            {
-                if (!TimeOnly.TryParse(timeStr, out _))
-                    return false;
-            }
+        //    foreach (var timeStr in times)
+        //    {
+        //        if (!TimeOnly.TryParse(timeStr, out _))
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         //private bool IsValidShowTimeFormat(string showTime)
         //{

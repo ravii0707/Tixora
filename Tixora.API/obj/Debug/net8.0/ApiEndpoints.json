@@ -254,7 +254,7 @@
   {
     "ContainingType": "Tixora.API.Controllers.UsersController",
     "Method": "GetAll",
-    "RelativePath": "api/users",
+    "RelativePath": "api/role",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -264,7 +264,7 @@
   {
     "ContainingType": "Tixora.API.Controllers.UsersController",
     "Method": "GetById",
-    "RelativePath": "api/users/{id}",
+    "RelativePath": "api/role/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -280,7 +280,7 @@
   {
     "ContainingType": "Tixora.API.Controllers.UsersController",
     "Method": "Login",
-    "RelativePath": "api/users/login",
+    "RelativePath": "api/role/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -296,7 +296,7 @@
   {
     "ContainingType": "Tixora.API.Controllers.UsersController",
     "Method": "Register",
-    "RelativePath": "api/users/register",
+    "RelativePath": "api/role/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

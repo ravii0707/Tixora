@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Tixora.Core.DTOs;
 using Tixora.Core.Entities;
@@ -36,64 +33,64 @@ namespace Tixora.Service.Implementations
 
         public async Task<BookingResponseDTO> CreateAsync(BookingCreateDTO bookingDto)
         {
-            // Validate user exists
+            // 1. Validate User exists
             var user = await _userRepository.GetByIdAsync(bookingDto.UserId);
             if (user == null)
-            {
                 throw new NotFoundException("User not found");
-            }
 
-            // Validate movie exists
+            // 2. Validate Movie exists
             var movie = await _movieRepository.GetByIdAsync(bookingDto.MovieId);
             if (movie == null)
-            {
                 throw new NotFoundException("Movie not found");
-            }
 
-            // Validate showtime exists
+            // 3. Validate Showtime exists
             var showtime = await _showTimeRepository.GetByIdAsync(bookingDto.ShowtimeId);
             if (showtime == null)
-            {
                 throw new NotFoundException("Showtime not found");
-            }
 
-            // Check if showtime belongs to the movie
+            // 4. Validate Showtime belongs to Movie
             if (showtime.MovieId != bookingDto.MovieId)
-            {
                 throw new BadRequestException("Showtime doesn't belong to the specified movie");
-            }
 
-            // Check available seats
+            // 5. Validate Showtime is in future
+            var showDateTime = showtime.ShowDate.ToDateTime(TimeOnly.Parse(showtime.ShowTime));
+            if (showDateTime < DateTime.Now)
+                throw new BadRequestException("Cannot book tickets for past showtimes");
+
+            // 6. Validate available seats
             if (showtime.AvailableSeats < bookingDto.TicketCount)
-            {
-                throw new BadRequestException("Not enough available seats");
-            }
+                throw new BadRequestException($"Not enough seats. Available: {showtime.AvailableSeats}");
 
-            // Check for duplicate booking
+            // 7. Prevent duplicate bookings
             if (await _bookingRepository.ExistsAsync(bookingDto.UserId, bookingDto.ShowtimeId, bookingDto.MovieId))
-            {
-                throw new BadRequestException("Booking already exists for this user, showtime and movie");
-            }
+                throw new BadRequestException("You already have a booking for this show");
 
-            // Create booking
+            // 8. Create booking
             var booking = _mapper.Map<TbBookingHistory>(bookingDto);
-            booking.TotalAmount = bookingDto.TicketCount * 200;
-            var createdBooking = await _bookingRepository.AddAsync(booking);
+            booking.TotalAmount = CalculateTotal(bookingDto.TicketCount, showtime);
+            booking.BookingDate = DateTime.Now;
 
-            // Update available seats
+            // 9. Save booking and update seats
+            var createdBooking = await _bookingRepository.AddAsync(booking);
             showtime.AvailableSeats -= bookingDto.TicketCount;
             await _showTimeRepository.UpdateAsync(showtime);
 
+            // 10. Return enriched response
             return _mapper.Map<BookingResponseDTO>(createdBooking);
+        }
+
+        private decimal CalculateTotal(int ticketCount, TbShowTime showtime)
+        {
+            // Replace with your actual pricing logic
+            const decimal basePrice = 200m;
+            return ticketCount * basePrice;
         }
 
         public async Task<BookingResponseDTO> GetByIdAsync(int id)
         {
             var booking = await _bookingRepository.GetByIdAsync(id);
             if (booking == null)
-            {
                 throw new NotFoundException("Booking not found");
-            }
 
             return _mapper.Map<BookingResponseDTO>(booking);
         }

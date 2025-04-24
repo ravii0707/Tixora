@@ -405,7 +405,7 @@
         }
       }
     },
-    "/api/users/register": {
+    "/api/role/register": {
       "post": {
         "tags": [
           "Users"
@@ -436,7 +436,7 @@
         }
       }
     },
-    "/api/users/login": {
+    "/api/role/login": {
       "post": {
         "tags": [
           "Users"
@@ -467,7 +467,7 @@
         }
       }
     },
-    "/api/users/{id}": {
+    "/api/role/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -490,7 +490,7 @@
         }
       }
     },
-    "/api/users": {
+    "/api/role": {
       "get": {
         "tags": [
           "Users"
@@ -713,19 +713,22 @@
             "type": "string"
           },
           "email": {
-            "maxLength": 100,
-            "minLength": 0,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.(com|org|net|edu|gov|co\\.uk|in|ca|us|us\\.org)$",
             "type": "string",
             "format": "email"
           },
           "phone": {
-            "minLength": 1,
-            "pattern": "^[0-9]{10,20}$",
-            "type": "string"
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "^\\d{10}$",
+            "type": "string",
+            "nullable": true
           },
           "password": {
             "maxLength": 100,
-            "minLength": 6,
+            "minLength": 8,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$",
             "type": "string"
           }
         },

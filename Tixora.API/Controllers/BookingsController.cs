@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.DTOs;
 using Tixora.Service;
+using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
 
 namespace Tixora.API.Controllers;
@@ -19,8 +20,15 @@ public class BookingsController : ControllerBase
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] BookingCreateDTO bookingDto)
     {
-        var booking = await _bookingService.CreateAsync(bookingDto);
-        return CreatedAtAction(nameof(GetById), new { id = booking.BookingId }, booking);
+        try
+        {
+            var booking = await _bookingService.CreateAsync(bookingDto);
+            return CreatedAtAction(nameof(GetById), new { id = booking.BookingId }, booking);
+        }
+        catch (BadRequestException ex)
+        {
+            return BadRequest(new { Message = ex.Message });
+        }
     }
 
     [HttpGet("{id}")]

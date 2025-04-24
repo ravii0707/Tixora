@@ -65,6 +65,7 @@ using Tixora.Service.Interfaces;
 using Tixora.Service;
 using Tixora.Core.Context;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
@@ -82,7 +83,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TixoraConnection")));
 
 // AutoMapper - this is the correct way to register it
-builder.Services.AddAutoMapper(typeof(MappingProfile)); // Reference your mapping profile class
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 
 // Repositories - example of correct registration
 builder.Services.AddScoped<IUserRepository, UserRepository>();

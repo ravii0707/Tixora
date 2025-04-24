@@ -24,11 +24,9 @@ public class MappingProfile : Profile
         // ShowTime mappings
         CreateMap<TbShowTime, ShowTimeResponseDTO>()
                .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
-               .ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src =>
-                   string.IsNullOrWhiteSpace(src.ShowTime)
-                       ? new List<string>()
-                       : src.ShowTime.Split('|', StringSplitOptions.RemoveEmptyEntries).ToList()
-               ));
+    // Remove the Split logic since ShowTime is a simple string
+    .ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src => src.ShowTime));
+
 
         CreateMap<ShowTimeCreateDTO, TbShowTime>();
 

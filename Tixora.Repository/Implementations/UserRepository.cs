@@ -26,14 +26,21 @@ namespace Tixora.Repository.Implementations
             return user;
         }
 
-        public async Task<TbUser> GetByIdAsync(int id)
+        public async Task<TbUser?> GetByIdAsync(int id)
         {
             return await _context.TbUsers.FindAsync(id);
         }
 
-        public async Task<TbUser> GetByEmailAsync(string email)
+        //public async Task<TbUser?> GetByEmailAsync(string email)
+        //{
+        //    return await _context.TbUsers.FirstOrDefaultAsync(u => u.Email == email);
+        //}
+
+        public async Task<TbUser?> GetByEmailAsync(string email)
         {
-            return await _context.TbUsers.FirstOrDefaultAsync(u => u.Email == email);
+    var normalizedEmail = email.Trim().ToLower();
+    return await _context.TbUsers
+        .FirstOrDefaultAsync(u => u.Email.Trim().ToLower() == normalizedEmail);
         }
 
         public async Task<IEnumerable<TbUser>> GetAllAsync()
