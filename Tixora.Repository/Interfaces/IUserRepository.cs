@@ -14,6 +14,9 @@ namespace Tixora.Repository.Interfaces
         Task<TbUser?> GetByEmailAsync(string email);
         Task<IEnumerable<TbUser>> GetAllAsync();
         Task<bool> EmailExistsAsync(string email);
-       
+
+        Task<TbUser> GetByPhoneAsync(string phone);
+        Task<bool> PhoneExistsAsync(string phone);
+
     }
 }

@@ -20,12 +20,16 @@ namespace Tixora.Core.DTOs
 
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid email format.")]
-        [RegularExpression(@"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.(com|org|net|edu|gov|co\.uk|in|ca|us|us\.org)$",
-       ErrorMessage = "Email must be in a valid format and contain a known domain.")]
+        [RegularExpression(
+            @"^[a-zA-Z0-9._%+-]+@(gmail|outlook|yahoo|vivejaitservices|Tixora)\.(com|org)$",
+            ErrorMessage = "Email domain must be @gmail.com, @outlook.com, @yahoo.com, @vivejaitservices.com, or @Tixora.com/.org")]
         public required string Email { get; set; }
 
-        [StringLength(10, MinimumLength = 10, ErrorMessage = "Phone number must be 10 digits.")]
-        [RegularExpression(@"^\d{10}$", ErrorMessage = "Phone number must contain only digits.")]
+        [Required(ErrorMessage = "Phone number is required")]
+        [StringLength(10, MinimumLength = 10,
+          ErrorMessage = "Phone must be exactly 10 digits")]
+        [RegularExpression(@"^[6-9]\d{9}$",
+          ErrorMessage = "Phone must start with 6,7,8, or 9")]
         public required string Phone { get; set; }
 
         [Required]

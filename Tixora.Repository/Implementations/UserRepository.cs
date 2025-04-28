@@ -52,5 +52,14 @@ namespace Tixora.Repository.Implementations
         {
             return await _context.TbUsers.AnyAsync(u => u.Email == email);
         }
+
+        public async Task<TbUser> GetByPhoneAsync(string phone) 
+        {
+            return await _context.TbUsers.FirstOrDefaultAsync(u => u.Phone == phone);
+        }
+        public async Task<bool> PhoneExistsAsync(string phone)
+        {
+            return await _context.TbUsers.AnyAsync(u => u.Phone == phone);
+        }
     }
 }

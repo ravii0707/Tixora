@@ -1,34 +1,8 @@
 [
   {
     "ContainingType": "Tixora.API.Controllers.BookingsController",
-    "Method": "GetAll",
-    "RelativePath": "api/booking",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tixora.API.Controllers.BookingsController",
-    "Method": "GetById",
-    "RelativePath": "api/booking/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Tixora.API.Controllers.BookingsController",
     "Method": "Create",
-    "RelativePath": "api/booking/create",
+    "RelativePath": "api/bookings",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -43,8 +17,34 @@
   },
   {
     "ContainingType": "Tixora.API.Controllers.BookingsController",
+    "Method": "GetAll",
+    "RelativePath": "api/bookings",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tixora.API.Controllers.BookingsController",
+    "Method": "GetById",
+    "RelativePath": "api/bookings/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tixora.API.Controllers.BookingsController",
     "Method": "GetByUserId",
-    "RelativePath": "api/booking/user/{userId}",
+    "RelativePath": "api/bookings/user/{userId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

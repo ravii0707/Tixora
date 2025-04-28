@@ -1,22 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tixora.Core.Context;
 using Tixora.Core.Entities;
 using Tixora.Repository.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Tixora.Repository.Implementations
 {
     public class MovieRepository : IMovieRepository
     {
         private readonly AppDbContext _context;
+        private readonly ILogger<MovieRepository> _logger;
 
-        public MovieRepository(AppDbContext context)
+        public MovieRepository(AppDbContext context, ILogger<MovieRepository> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         public async Task<TbMovie> AddAsync(TbMovie movie)
@@ -38,7 +36,9 @@ namespace Tixora.Repository.Implementations
 
         public async Task<IEnumerable<TbMovie>> GetAllActiveAsync()
         {
-            return await _context.TbMovies.Where(m => m.IsActive == true).ToListAsync();
+            return await _context.TbMovies
+                .Where(m => m.IsActive == true)
+                .ToListAsync();
         }
 
         public async Task<TbMovie> UpdateAsync(TbMovie movie)
@@ -57,7 +57,8 @@ namespace Tixora.Repository.Implementations
             await _context.SaveChangesAsync();
             return true;
         }
-        public async Task ToggleActiveStatusAsync(int movieId, bool isActive) 
+
+        public async Task ToggleActiveStatusAsync(int movieId, bool isActive)
         {
             var movie = await GetByIdAsync(movieId);
             if (movie != null)

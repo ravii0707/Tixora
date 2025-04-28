@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/booking/create": {
+    "/api/bookings": {
       "post": {
         "tags": [
           "Bookings"
@@ -34,9 +34,19 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
-    "/api/booking/{id}": {
+    "/api/bookings/{id}": {
       "get": {
         "tags": [
           "Bookings"
@@ -59,7 +69,7 @@
         }
       }
     },
-    "/api/booking/user/{userId}": {
+    "/api/bookings/user/{userId}": {
       "get": {
         "tags": [
           "Bookings"
@@ -74,18 +84,6 @@
               "format": "int32"
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/booking": {
-      "get": {
-        "tags": [
-          "Bookings"
         ],
         "responses": {
           "200": {
@@ -662,7 +660,7 @@
             "type": "string"
           },
           "availableSeats": {
-            "maximum": 500,
+            "maximum": 250,
             "minimum": 1,
             "type": "integer",
             "format": "int32"
@@ -714,16 +712,15 @@
           },
           "email": {
             "minLength": 1,
-            "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.(com|org|net|edu|gov|co\\.uk|in|ca|us|us\\.org)$",
+            "pattern": "^[a-zA-Z0-9._%+-]+@(gmail|outlook|yahoo|vivejaitservices|Tixora)\\.(com|org)$",
             "type": "string",
             "format": "email"
           },
           "phone": {
             "maxLength": 10,
             "minLength": 10,
-            "pattern": "^\\d{10}$",
-            "type": "string",
-            "nullable": true
+            "pattern": "^[6-9]\\d{9}$",
+            "type": "string"
           },
           "password": {
             "maxLength": 100,

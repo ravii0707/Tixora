@@ -1,17 +1,12 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tixora.Core.DTOs;
 using Tixora.Core.Entities;
 using Tixora.Repository.Interfaces;
 using Tixora.Service.Exceptions;
-using Tixora.Service.Interfaces;
-
 using Tixora.Core.Context;
+using Microsoft.Extensions.Logging;
+using Tixora.Service.Interfaces;
 
 namespace Tixora.Service.Implementations
 {
@@ -20,19 +15,34 @@ namespace Tixora.Service.Implementations
         private readonly IMovieRepository _movieRepository;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
+        private readonly ILogger<MovieService> _logger;
 
-        public MovieService(IMovieRepository movieRepository, IMapper mapper, AppDbContext context)
+        public MovieService(
+            IMovieRepository movieRepository,
+            IMapper mapper,
+            AppDbContext context,
+            ILogger<MovieService> logger)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
             _context = context;
+            _logger = logger;
         }
-      
+
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
         {
-            var movie = _mapper.Map<TbMovie>(movieDto);
-            var createdMovie = await _movieRepository.AddAsync(movie);
-            return _mapper.Map<MovieResponseDTO>(createdMovie);
+            try
+            {
+                var movie = _mapper.Map<TbMovie>(movieDto);
+                var createdMovie = await _movieRepository.AddAsync(movie);
+                _logger.LogInformation("Movie created with ID: {MovieId}", createdMovie.MovieId);
+                return _mapper.Map<MovieResponseDTO>(createdMovie);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error creating movie");
+                throw new BadRequestException("Failed to create movie. Please check your input and try again.");
+            }
         }
 
         public async Task<MovieResponseDTO> GetByIdAsync(int id)
@@ -40,9 +50,9 @@ namespace Tixora.Service.Implementations
             var movie = await _movieRepository.GetByIdAsync(id);
             if (movie == null)
             {
-                throw new NotFoundException("Movie not found");
+                _logger.LogWarning("Movie not found with ID: {MovieId}", id);
+                throw new NotFoundException("Movie", id);
             }
-
             return _mapper.Map<MovieResponseDTO>(movie);
         }
 
@@ -60,34 +70,70 @@ namespace Tixora.Service.Implementations
 
         public async Task<MovieResponseDTO> UpdateAsync(int id, MovieCreateDTO movieDto)
         {
-            var existingMovie = await _movieRepository.GetByIdAsync(id);
-            if (existingMovie == null)
+            try
             {
-                throw new NotFoundException("Movie not found");
-            }
+                var existingMovie = await _movieRepository.GetByIdAsync(id);
+                if (existingMovie == null)
+                {
+                    _logger.LogWarning("Movie not found for update with ID: {MovieId}", id);
+                    throw new NotFoundException("Movie", id);
+                }
 
-            _mapper.Map(movieDto, existingMovie);
-            var updatedMovie = await _movieRepository.UpdateAsync(existingMovie);
-            return _mapper.Map<MovieResponseDTO>(updatedMovie);
+                _mapper.Map(movieDto, existingMovie);
+                var updatedMovie = await _movieRepository.UpdateAsync(existingMovie);
+                _logger.LogInformation("Movie updated with ID: {MovieId}", id);
+                return _mapper.Map<MovieResponseDTO>(updatedMovie);
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error updating movie with ID: {MovieId}", id);
+                throw new BadRequestException("Failed to update movie. Please check your input and try again.");
+            }
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            return await _movieRepository.DeleteAsync(id);
+            try
+            {
+                var result = await _movieRepository.DeleteAsync(id);
+                if (!result)
+                {
+                    _logger.LogWarning("Attempt to delete non-existent movie with ID: {MovieId}", id);
+                    throw new NotFoundException("Movie", id);
+                }
+                _logger.LogInformation("Movie deleted with ID: {MovieId}", id);
+                return true;
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Error deleting movie with ID: {MovieId}", id);
+                throw new BadRequestException("Failed to delete movie. It may be referenced by other records.");
+            }
         }
+
         public async Task ToggleMovieStatusAsync(int movieId, bool isActive)
         {
-            var movie = await _context.TbMovies.FindAsync(movieId);
-            if (movie == null)
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try
             {
-                throw new NotFoundException("Movie not found.");
+                var movie = await _context.TbMovies.FindAsync(movieId);
+                if (movie == null)
+                {
+                    _logger.LogWarning("Movie not found for status toggle with ID: {MovieId}", movieId);
+                    throw new NotFoundException("Movie", movieId);
+                }
+
+                movie.IsActive = isActive;
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
+                _logger.LogInformation("Movie {MovieId} status changed to {Status}",
+                    movieId, isActive ? "Active" : "Inactive");
             }
-
-            // Just mark the movie as active/inactive (without affecting ShowTimes)
-            movie.IsActive = isActive;
-
-            // Save changes
-            await _context.SaveChangesAsync();
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Tixora.Core.DTOs
         ErrorMessage = "Time must be in HH:mm 24-hour format (e.g., '13:30')")]
         public string ShowTime { get; set; } = null!;
 
-        [Range(1, 500, ErrorMessage = "Available seats must be between 1 and 500")]
+        [Range(1, 250, ErrorMessage = "Available seats must be between 1 and 250")]
         public int AvailableSeats { get; set; }
 
         public bool IsActive { get; set; } = true;

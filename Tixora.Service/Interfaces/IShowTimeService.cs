@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Tixora.Core.DTOs;
 
@@ -14,6 +11,5 @@ namespace Tixora.Service.Interfaces
         Task<IEnumerable<ShowTimeResponseDTO>> GetAllAsync();
         Task<IEnumerable<ShowTimeResponseDTO>> GetByMovieIdAsync(int movieId);
         Task<ShowTimeResponseDTO> UpdateAsync(int id, ShowTimeCreateDTO showTimeDto);
-        //Task BulkCreateAsync(int movieId, BulkShowTimeCreateDTO request);
     }
 }

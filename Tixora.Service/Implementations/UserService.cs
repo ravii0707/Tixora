@@ -29,6 +29,10 @@ namespace Tixora.Service.Implementations
             {
                 throw new BadRequestException("Email already exists");
             }
+            if (await _userRepository.PhoneExistsAsync(userDto.Phone))
+            {
+                throw new BadRequestException("Phone number already in use");
+            }
 
             var user = _mapper.Map<TbUser>(userDto);
             user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);

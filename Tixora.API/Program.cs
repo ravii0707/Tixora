@@ -64,6 +64,7 @@ using Tixora.Service.Implementations;
 using Tixora.Service.Interfaces;
 using Tixora.Service;
 using Tixora.Core.Context;
+using Tixora.API.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -112,6 +113,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+// Add the exception handling middleware
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 
