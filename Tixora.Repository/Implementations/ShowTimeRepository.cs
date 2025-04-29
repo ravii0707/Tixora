@@ -82,5 +82,12 @@ namespace Tixora.Repository.Implementations
                 .Where(st => st.MovieId == movieId && st.IsActive == true)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<TbShowTime>> GetByDateAsync(DateOnly date)
+        {
+            return await _context.TbShowTimes
+               .Where(st => st.ShowDate == date && st.IsActive == true)
+               .ToListAsync();
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace Tixora.Repository.Interfaces
         Task<TbShowTime?> GetByIdAsync(int id);
         Task<IEnumerable<TbShowTime>> GetAllAsync();
         Task<IEnumerable<TbShowTime>> GetByMovieIdAsync(int movieId);
+        
         Task<TbShowTime> UpdateAsync(TbShowTime showTime);
+        Task<IEnumerable<TbShowTime>> GetByDateAsync(DateOnly date);
     }
 }

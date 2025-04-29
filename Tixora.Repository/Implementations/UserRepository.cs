@@ -31,11 +31,6 @@ namespace Tixora.Repository.Implementations
             return await _context.TbUsers.FindAsync(id);
         }
 
-        //public async Task<TbUser?> GetByEmailAsync(string email)
-        //{
-        //    return await _context.TbUsers.FirstOrDefaultAsync(u => u.Email == email);
-        //}
-
         public async Task<TbUser?> GetByEmailAsync(string email)
         {
     var normalizedEmail = email.Trim().ToLower();

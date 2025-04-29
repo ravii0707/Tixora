@@ -403,7 +403,7 @@
         }
       }
     },
-    "/api/role/register": {
+    "/api/user/register": {
       "post": {
         "tags": [
           "Users"
@@ -434,7 +434,7 @@
         }
       }
     },
-    "/api/role/login": {
+    "/api/user/login": {
       "post": {
         "tags": [
           "Users"
@@ -465,7 +465,7 @@
         }
       }
     },
-    "/api/role/{id}": {
+    "/api/user/{id}": {
       "get": {
         "tags": [
           "Users"
@@ -488,7 +488,7 @@
         }
       }
     },
-    "/api/role": {
+    "/api/user": {
       "get": {
         "tags": [
           "Users"
@@ -562,7 +562,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "ticketCount": {
+          "numberOfTickets": {
             "maximum": 6,
             "minimum": 1,
             "type": "integer",
@@ -573,11 +573,11 @@
       },
       "MovieCreateDTO": {
         "required": [
-          "title"
+          "movieName"
         ],
         "type": "object",
         "properties": {
-          "title": {
+          "movieName": {
             "maxLength": 200,
             "minLength": 0,
             "type": "string"
@@ -586,13 +586,6 @@
             "maxLength": 100,
             "minLength": 0,
             "type": "string",
-            "nullable": true
-          },
-          "duration": {
-            "maximum": 500,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32",
             "nullable": true
           },
           "language": {
@@ -612,20 +605,6 @@
             "nullable": true
           },
           "imageUrl": {
-            "maxLength": 1255,
-            "minLength": 0,
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "trailerUrl": {
-            "maxLength": 1255,
-            "minLength": 0,
-            "type": "string",
-            "format": "uri",
-            "nullable": true
-          },
-          "posterUrl": {
             "maxLength": 1255,
             "minLength": 0,
             "type": "string",

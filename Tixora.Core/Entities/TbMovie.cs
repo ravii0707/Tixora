@@ -21,7 +21,7 @@ public partial class TbMovie
     [Unicode(false)]
     public string? Genre { get; set; }
 
-    public int? Duration { get; set; }
+
 
     [StringLength(50)]
     [Unicode(false)]
@@ -37,14 +37,6 @@ public partial class TbMovie
     [Column("ImageURL")]
     [StringLength(1255)]
     public string? ImageUrl { get; set; }
-
-    [Column("TrailerURL")]
-    [StringLength(1255)]
-    public string? TrailerUrl { get; set; }
-
-    [Column("PosterURL")]
-    [StringLength(1255)]
-    public string? PosterUrl { get; set; }
 
     public bool IsActive { get; set; } = true;
 

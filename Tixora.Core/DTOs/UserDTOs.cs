@@ -38,7 +38,7 @@ namespace Tixora.Core.DTOs
         ErrorMessage = "Password must contain uppercase, lowercase, number, and special character")]
         public required string Password { get; set; }
 
-    // RoleName is not included here as it should default to "user"
+
     }
 public class UserLoginDTO
 {
@@ -58,6 +58,6 @@ public class UserLoginDTO
         public required string LastName { get; set; }
         public required string Email { get; set; }
         public required string Phone { get; set; }
-        // Password is not included in response
+    
     }
 }

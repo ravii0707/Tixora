@@ -17,6 +17,7 @@ namespace Tixora.Service.Implementations
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
+        // Constructor: Initializes dependencies
         public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
@@ -25,76 +26,60 @@ namespace Tixora.Service.Implementations
 
         public async Task<UserResponseDTO> RegisterAsync(UserRegisterDTO userDto)
         {
+            // Check if email already exists
             if (await _userRepository.EmailExistsAsync(userDto.Email))
             {
                 throw new BadRequestException("Email already exists");
             }
+
+            // Check if phone number already exists
             if (await _userRepository.PhoneExistsAsync(userDto.Phone))
             {
                 throw new BadRequestException("Phone number already in use");
             }
 
+            // Map DTO to User entity
             var user = _mapper.Map<TbUser>(userDto);
-            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-            user.RoleName = "user"; // Force role to be user
 
+            // CHANGED: Hash the password before storing
+            user.Password = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
+
+            // Set default role
+            user.RoleName = "user";
+
+            // Add user to database
             var createdUser = await _userRepository.AddAsync(user);
+
+            // Map and return the response DTO
             return _mapper.Map<UserResponseDTO>(createdUser);
         }
 
-        //public async Task<UserResponseDTO> LoginAsync(UserLoginDTO loginDto)
-        //{
-        //    var user = await _userRepository.GetByEmailAsync(loginDto.Email);
-        //    if (user == null || user.Password != loginDto.Password) // In real app, use hashed passwords
-        //    {
-        //        throw new UnauthorizedException("Invalid email or password");
-        //    }
-
-        //    return _mapper.Map<UserResponseDTO>(user);
-        //}
-
         public async Task<UserResponseDTO> LoginAsync(UserLoginDTO loginDto)
         {
+            // Get user by email
+            var user = await _userRepository.GetByEmailAsync(loginDto.Email);
+
+            // CHANGED: Added null check first
+            if (user == null)
             {
-                var user = await _userRepository.GetByEmailAsync(loginDto.Email);
-
-                // In a real application, you would verify the hashed password here
-                if (user.Password != loginDto.Password)
-                    throw new UnauthorizedException("Invalid credentials");
-
-                return _mapper.Map<UserResponseDTO>(user);
+                throw new UnauthorizedException("Invalid credentials");
             }
 
+            // CHANGED: Proper password verification using BCrypt
+            if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
+            {
+                throw new UnauthorizedException("Invalid credentials");
+            }
 
-            //if (loginDto == null)
-            //    throw new ArgumentNullException(nameof(loginDto));
-
-            //if (string.IsNullOrWhiteSpace(loginDto.Email))
-            //    throw new UnauthorizedException("Email is required");
-
-            //if (string.IsNullOrWhiteSpace(loginDto.Password))
-            //    throw new UnauthorizedException("Password is required");
-
-            //// Get user by email (case-insensitive)
-            //var user = await _userRepository.GetByEmailAsync(loginDto.Email);
-
-            //if (user == null)
-            //    throw new UnauthorizedException("Invalid credentials");
-
-            // Check if user is active (if you have such property)
-            //if (user.IsActive == false)
-            //    throw new UnauthorizedException("Account is inactive");
-
-            // Password comparison (plaintext - not recommended for production)
-            //if (user.Password?.Trim() != loginDto.Password?.Trim())
-            //    throw new UnauthorizedException("Invalid credential1s");
-
-            //return _mapper.Map<UserResponseDTO>(user);
+            // Map and return user data
+            return _mapper.Map<UserResponseDTO>(user);
         }
 
         public async Task<UserResponseDTO> GetByIdAsync(int id)
         {
+            // Get user by ID
             var user = await _userRepository.GetByIdAsync(id);
+
             if (user == null)
             {
                 throw new NotFoundException("User not found");
@@ -105,7 +90,10 @@ namespace Tixora.Service.Implementations
 
         public async Task<IEnumerable<UserResponseDTO>> GetAllAsync()
         {
+            // Get all users
             var users = await _userRepository.GetAllAsync();
+
+            // Map to response DTOs
             return _mapper.Map<IEnumerable<UserResponseDTO>>(users);
         }
     }

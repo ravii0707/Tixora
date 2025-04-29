@@ -6,7 +6,7 @@ using Tixora.Service.Interfaces;
 
 namespace Tixora.API.Controllers;
 
-[Route("api/role")]
+[Route("api/user")]
 [ApiController]
 public class UsersController : ControllerBase
 {

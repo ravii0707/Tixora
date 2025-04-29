@@ -1,5 +1,4 @@
-﻿// Tixora.Service/Exceptions/BadRequestException.cs (UPDATED)
-namespace Tixora.Service.Exceptions;
+﻿namespace Tixora.Service.Exceptions;
 
 public class BadRequestException : Exception
 {

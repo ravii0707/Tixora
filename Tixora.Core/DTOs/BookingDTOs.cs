@@ -19,10 +19,8 @@ namespace Tixora.Core.DTOs
         public int MovieId { get; set; }
 
         [Range(1, 6, ErrorMessage = "You can book between 1 to 6 tickets at a time.")]
-        public int TicketCount { get; set; }
+        public int TickectCount { get; set; }
 
-        //[Range(0.01, 10000, ErrorMessage = "Total amount must be between 0.01 and 10,000")]
-        //public decimal TotalAmount { get; set; }
     }
 
     public class BookingResponseDTO

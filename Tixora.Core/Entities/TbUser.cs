@@ -10,8 +10,6 @@ namespace Tixora.Core.Entities;
 [Index("Email", Name = "UQ__tb_Users__A9D1053444AE5810", IsUnique = true)]
 public partial class TbUser
 {
-    //public required string PasswordHash;
-
     [Key]
     [Column("UserID")]
     public int UserId { get; set; }
