@@ -35,21 +35,22 @@ public class MappingProfile : Profile
 
         CreateMap<ShowTimeCreateDTO, TbShowTime>();
 
-        // Booking mappings
+       
         // Booking mappings
         CreateMap<TbBookingHistory, BookingResponseDTO>()
-           .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
-            .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
-            .ForMember(dest => dest.Showtime, opt => opt.MapFrom(src => $"{src.Showtime.ShowDate} {src.Showtime.ShowTime}"))
-            .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
+          .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
+    .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
+    .ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src => src.Showtime.ShowTime))
+    .ForMember(dest => dest.ShowDate, opt => opt.MapFrom(src => src.Showtime.ShowDate))
+    .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
         CreateMap<BookingCreateDTO, TbBookingHistory>();
 
-        // Booking mappings
-        CreateMap<TbBookingHistory, BookingResponseDTO>()
-                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
-                .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
+        //// Booking mappings
+        //CreateMap<TbBookingHistory, BookingResponseDTO>()
+        //        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
+        //        .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
                
-                .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
-        CreateMap<BookingCreateDTO, TbBookingHistory>();
+        //        .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
+        //CreateMap<BookingCreateDTO, TbBookingHistory>();
     }
 }

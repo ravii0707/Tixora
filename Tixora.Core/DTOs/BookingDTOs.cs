@@ -22,7 +22,8 @@ public class BookingResponseDTO
     public int UserId { get; set; }
     public required string UserName { get; set; }
     public int ShowtimeId { get; set; }
-    public required string Showtime { get; set; }
+    public required string ShowTime { get; set; }
+    public DateOnly ShowDate { get; set; }
     public int MovieId { get; set; }
     public required string MovieTitle { get; set; }
     public int TicketCount { get; set; }
