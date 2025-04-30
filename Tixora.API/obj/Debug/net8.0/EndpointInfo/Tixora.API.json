@@ -259,6 +259,60 @@
         }
       }
     },
+    "/api/movie-showtimes": {
+      "post": {
+        "tags": [
+          "MovieWithShowTimes"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/movie-showtimes/{movieId}": {
+      "get": {
+        "tags": [
+          "MovieWithShowTimes"
+        ],
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/movies/{movieId}/showtimes": {
       "get": {
         "tags": [
@@ -613,6 +667,22 @@
           },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MovieWithShowTimesDTO": {
+        "type": "object",
+        "properties": {
+          "movie": {
+            "$ref": "#/components/schemas/MovieCreateDTO"
+          },
+          "shows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShowTimeCreateDTO"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false

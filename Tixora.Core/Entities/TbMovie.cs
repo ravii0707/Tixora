@@ -21,8 +21,6 @@ public partial class TbMovie
     [Unicode(false)]
     public string? Genre { get; set; }
 
-
-
     [StringLength(50)]
     [Unicode(false)]
     public string? Language { get; set; }

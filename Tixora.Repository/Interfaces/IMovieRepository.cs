@@ -14,5 +14,9 @@ namespace Tixora.Repository.Interfaces
         Task<bool> DeleteAsync(int id);
         Task ToggleActiveStatusAsync(int movieId, bool isActive);
         //Task<TbMovie> GetByTitleAsync(string title);
+
+        Task BeginTransactionAsync();
+        Task CommitTransactionAsync();
+        Task RollbackTransactionAsync();
     }
 }

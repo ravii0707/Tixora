@@ -1,3 +1,10 @@
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.csproj.AssemblyReference.cache
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.AssemblyInfoInputs.cache
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.AssemblyInfo.cs
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.sourcelink.json
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\appsettings.Development.json
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\appsettings.json
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\Tixora.API.staticwebassets.endpoints.json
@@ -72,14 +79,6 @@ C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\Tixora.Service.dll
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\Tixora.Core.pdb
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\Tixora.Service.pdb
 C:\Tixora\Tixora\Tixora.API\bin\Debug\net8.0\Tixora.Repository.pdb
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.csproj.AssemblyReference.cache
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.GeneratedMSBuildEditorConfig.editorconfig
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.AssemblyInfoInputs.cache
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.AssemblyInfo.cs
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.csproj.CoreCompileInputs.cache
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.MvcApplicationPartsAssemblyInfo.cs
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.MvcApplicationPartsAssemblyInfo.cache
-C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.sourcelink.json
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\scopedcss\bundle\Tixora.API.styles.css
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\staticwebassets.build.json
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\staticwebassets.development.json
@@ -97,3 +96,4 @@ C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\refint\Tixora.API.dll
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.pdb
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.genruntimeconfig.cache
 C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\ref\Tixora.API.dll
+C:\Tixora\Tixora\Tixora.API\obj\Debug\net8.0\Tixora.API.MvcApplicationPartsAssemblyInfo.cs

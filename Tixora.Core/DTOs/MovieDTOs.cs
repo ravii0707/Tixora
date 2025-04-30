@@ -29,8 +29,6 @@ namespace Tixora.Core.DTOs
         [Url(ErrorMessage = "Invalid URL format")]
         [StringLength(1255, ErrorMessage = "Image URL cannot exceed 1255 characters")]
         public string? ImageUrl { get; set; }
-
-
         public bool IsActive { get; set; } = true;
     }
 
@@ -39,7 +37,6 @@ namespace Tixora.Core.DTOs
         public int MovieId { get; set; }
         public required string Title { get; set; }
         public string? Genre { get; set; }
-
         public string? Language { get; set; }
         public string? Format { get; set; }
         public string? Description { get; set; }

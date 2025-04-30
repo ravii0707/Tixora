@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.DTOs;
+using Tixora.Service.Exceptions;
+using Tixora.Service.Implementations;
 using Tixora.Service.Interfaces;
 
 namespace Tixora.API.Controllers;
@@ -10,11 +12,13 @@ public class MoviesController : ControllerBase
 {
     private readonly IMovieService _movieService;
     private readonly ILogger<MoviesController> _logger;
+    private readonly IShowTimeService _showTimeService;
 
-    public MoviesController(IMovieService movieService, ILogger<MoviesController> logger)
+    public MoviesController(IMovieService movieService, ILogger<MoviesController> logger, IShowTimeService showTimeService)
     {
         _movieService = movieService;
         _logger = logger;
+        _showTimeService = showTimeService;
     }
 
     [HttpGet]

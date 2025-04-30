@@ -20,7 +20,20 @@ public class MappingProfile : Profile
 
         //Deactive Mappings
         CreateMap<TbMovie, MovieResponseDTO>();
-        CreateMap<MovieCreateDTO, TbMovie>();
+
+        CreateMap<MovieWithShowTimesDTO, TbMovie>()
+           .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Movie.Title))
+           .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Movie.Genre))
+           // Map all other properties explicitly
+           .ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Movie.Language))
+           .ForMember(dest => dest.Format, opt => opt.MapFrom(src => src.Movie.Format))
+           .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Movie.Description))
+           .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Movie.ImageUrl));
+
+        CreateMap<MovieCreateDTO, TbMovie>()
+        .ForMember(dest => dest.MovieId, opt => opt.Ignore())
+    .ForMember(dest => dest.TbBookingHistories, opt => opt.Ignore())
+    .ForMember(dest => dest.TbShowTimes, opt => opt.Ignore());
 
         // ShowTime mappings
         CreateMap<TbShowTime, ShowTimeResponseDTO>()
@@ -45,11 +58,14 @@ public class MappingProfile : Profile
     .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
         CreateMap<BookingCreateDTO, TbBookingHistory>();
 
+        //moviewithshowtime
+    
+
         //// Booking mappings
         //CreateMap<TbBookingHistory, BookingResponseDTO>()
         //        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
         //        .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
-               
+
         //        .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
         //CreateMap<BookingCreateDTO, TbBookingHistory>();
     }

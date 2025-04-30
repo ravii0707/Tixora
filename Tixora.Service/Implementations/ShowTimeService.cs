@@ -201,6 +201,34 @@ namespace Tixora.Service.Implementations
                 throw new BadRequestException("Failed to update showtime. Please check your input and try again.");
             }
         }
+
+        public async Task<IEnumerable<ShowTimeResponseDTO>> CreateMultipleShowTimesAsync(
+             int movieId,
+             IEnumerable<ShowTimeCreateDTO> showTimeDtos)
+        {
+            var createdShowTimes = new List<ShowTimeResponseDTO>();
+
+            foreach (var showTimeDto in showTimeDtos)
+            {
+                try
+                {
+                    // Set the movie ID for each showtime
+                    showTimeDto.MovieId = movieId;
+
+                    // Use the existing CreateAsync method which has all the validation logic
+                    var createdShowTime = await CreateAsync(showTimeDto);
+                    createdShowTimes.Add(createdShowTime);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error creating showtime for movie {MovieId}", movieId);
+                    // Continue with other showtimes even if one fails
+                    // You might want to handle this differently based on requirements
+                }
+            }
+
+            return createdShowTimes;
+        }
         //public async Task<IEnumerable<string>> GetAvailableTimeSlots(DateOnly date)
         //{
         //    var existingShows = await _showTimeRepository.GetByDateAsync(date);

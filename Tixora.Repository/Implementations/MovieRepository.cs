@@ -67,6 +67,20 @@ namespace Tixora.Repository.Implementations
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task BeginTransactionAsync()
+        {
+            await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task CommitTransactionAsync()
+        {
+            await _context.Database.CommitTransactionAsync();
+        }
+
+        public async Task RollbackTransactionAsync()
+        {
+            await _context.Database.RollbackTransactionAsync();
+        }
         //public async Task<TbMovie> GetByTitleAsync(string title)
         //{
         //    return await _context.TbMovies.FirstOrDefaultAsync(m => m.Title == title);

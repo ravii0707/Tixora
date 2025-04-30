@@ -7,6 +7,7 @@ using Tixora.Service.Exceptions;
 using Tixora.Core.Context;
 using Microsoft.Extensions.Logging;
 using Tixora.Service.Interfaces;
+using Tixora.Repository.Implementations;
 
 namespace Tixora.Service.Implementations
 {
@@ -16,17 +17,20 @@ namespace Tixora.Service.Implementations
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
         private readonly ILogger<MovieService> _logger;
+        private readonly IShowTimeRepository _showTimeRepository;
 
         public MovieService(
             IMovieRepository movieRepository,
             IMapper mapper,
             AppDbContext context,
-            ILogger<MovieService> logger)
+            ILogger<MovieService> logger,
+        IShowTimeRepository showTimeRepository)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
             _context = context;
             _logger = logger;
+            _showTimeRepository = showTimeRepository;
         }
 
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
@@ -134,6 +138,49 @@ namespace Tixora.Service.Implementations
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+        public async Task<MovieWithShowTimesResponseDTO> CreateMovieWithShowTimesAsync(MovieWithShowTimesDTO movieWithShows)
+        {
+            // Create the movie first
+            var movie = _mapper.Map<TbMovie>(movieWithShows.Movie);
+            var createdMovie = await _movieRepository.AddAsync(movie);
+
+            // Then create the showtimes
+            var showTimes = new List<ShowTimeResponseDTO>();
+            foreach (var showDto in movieWithShows.Shows)
+            {
+                var showTime = _mapper.Map<TbShowTime>(showDto);
+                showTime.MovieId = createdMovie.MovieId;
+                var createdShow = await _showTimeRepository.AddAsync(showTime);
+                showTimes.Add(_mapper.Map<ShowTimeResponseDTO>(createdShow));
+            }
+
+            // Map to response DTO
+            return new MovieWithShowTimesResponseDTO
+            {
+                Movie = _mapper.Map<MovieResponseDTO>(createdMovie),
+                Shows = showTimes
+            };
+        }
+
+        public async Task<MovieWithShowTimesResponseDTO> GetMovieWithShowTimesAsync(int movieId)
+        {
+            // Get the movie
+            var movie = await _movieRepository.GetByIdAsync(movieId);
+            if (movie == null)
+            {
+                throw new NotFoundException("Movie not found");
+            }
+
+            // Get its showtimes
+            var showTimes = await _showTimeRepository.GetByMovieIdAsync(movieId);
+
+            return new MovieWithShowTimesResponseDTO
+            {
+                Movie = _mapper.Map<MovieResponseDTO>(movie),
+                Shows = _mapper.Map<List<ShowTimeResponseDTO>>(showTimes)
+            };
         }
     }
 }

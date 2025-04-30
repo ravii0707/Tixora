@@ -58,6 +58,38 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Tixora.API.Controllers.MovieWithShowTimesController",
+    "Method": "CreateMovieWithShowTimes",
+    "RelativePath": "api/movie-showtimes",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "movieWithShows",
+        "Type": "Tixora.Core.DTOs.MovieWithShowTimesDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Tixora.API.Controllers.MovieWithShowTimesController",
+    "Method": "GetMovieWithShowTimes",
+    "RelativePath": "api/movie-showtimes/{movieId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "movieId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Tixora.API.Controllers.MoviesController",
     "Method": "GetAll",
     "RelativePath": "api/movies",
