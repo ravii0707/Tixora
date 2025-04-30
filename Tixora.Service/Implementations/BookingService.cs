@@ -81,15 +81,15 @@ namespace Tixora.Service.Implementations
                 }
 
                 // 6. Validate available seats
-                if (showtime.AvailableSeats < bookingDto.TickectCount)
+                if (showtime.AvailableSeats < bookingDto.TicketCount)
                 {
                     var errors = new Dictionary<string, string>
                     {
                         { "AvailableSeats", showtime.AvailableSeats.ToString() },
-                        { "RequestedTickets", bookingDto.TickectCount.ToString() }
+                        { "RequestedTickets", bookingDto.TicketCount.ToString() }
                     };
                     _logger.LogWarning("Not enough seats for showtime {ShowtimeId}. Available: {Available}, Requested: {Requested}",
-                        bookingDto.ShowtimeId, showtime.AvailableSeats, bookingDto.TickectCount);
+                        bookingDto.ShowtimeId, showtime.AvailableSeats, bookingDto.TicketCount);
                     throw new BadRequestException("Not enough available seats for your booking.", errors);
                 }
 
@@ -103,12 +103,12 @@ namespace Tixora.Service.Implementations
 
                 // 8. Create booking
                 var booking = _mapper.Map<TbBookingHistory>(bookingDto);
-                booking.TotalAmount = CalculateTotal(bookingDto.TickectCount, showtime);
+                booking.TotalAmount = CalculateTotal(bookingDto.TicketCount, showtime);
                 booking.BookingDate = DateTime.Now;
 
                 // 9. Save booking and update seats
                 var createdBooking = await _bookingRepository.AddAsync(booking);
-                showtime.AvailableSeats -= bookingDto.TickectCount;
+                showtime.AvailableSeats -= bookingDto.TicketCount;
                 await _showTimeRepository.UpdateAsync(showtime);
 
                 await transaction.CommitAsync();

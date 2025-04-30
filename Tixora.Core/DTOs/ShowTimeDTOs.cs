@@ -31,10 +31,22 @@ namespace Tixora.Core.DTOs
     {
         public int ShowtimeId { get; set; }
         public int MovieId { get; set; }
+
+        // Movie Details
         public required string MovieTitle { get; set; }
+        public string? Genre { get; set; }
+        public string? Language { get; set; }
+        public string? Format { get; set; }
+        public string? Description { get; set; }
+        public string? ImageUrl { get; set; }
+        public bool IsMovieActive { get; set; }
+
+        // ShowTime Details
         public DateOnly ShowDate { get; set; }
         public string ShowTime { get; set; } = null!;
         public bool IsActive { get; set; }
         public int AvailableSeats { get; set; }
+
+
     }
 }

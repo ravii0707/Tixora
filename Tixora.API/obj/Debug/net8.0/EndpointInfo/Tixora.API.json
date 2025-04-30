@@ -562,7 +562,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "tickectCount": {
+          "ticketCount": {
             "maximum": 6,
             "minimum": 1,
             "type": "integer",

@@ -9,7 +9,7 @@
     "Parameters": [
       {
         "Name": "bookingDto",
-        "Type": "Tixora.Core.DTOs.BookingCreateDTO",
+        "Type": "BookingCreateDTO",
         "IsRequired": true
       }
     ],
