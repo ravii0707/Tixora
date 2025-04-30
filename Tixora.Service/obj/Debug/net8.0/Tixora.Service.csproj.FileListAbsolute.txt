@@ -1,9 +1,3 @@
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.csproj.AssemblyReference.cache
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.GeneratedMSBuildEditorConfig.editorconfig
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfoInputs.cache
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfo.cs
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.csproj.CoreCompileInputs.cache
-C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.sourcelink.json
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Service.deps.json
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Service.dll
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Service.pdb
@@ -11,6 +5,12 @@ C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Core.dll
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Repository.dll
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Core.pdb
 C:\Tixora\Tixora\Tixora.Service\bin\Debug\net8.0\Tixora.Repository.pdb
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.csproj.AssemblyReference.cache
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfoInputs.cache
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.AssemblyInfo.cs
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.csproj.CoreCompileInputs.cache
+C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.sourcelink.json
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.S.58A48AE8.Up2Date
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\Tixora.Service.dll
 C:\Tixora\Tixora\Tixora.Service\obj\Debug\net8.0\refint\Tixora.Service.dll

@@ -562,7 +562,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "numberOfTickets": {
+          "tickectCount": {
             "maximum": 6,
             "minimum": 1,
             "type": "integer",
@@ -573,11 +573,11 @@
       },
       "MovieCreateDTO": {
         "required": [
-          "movieName"
+          "title"
         ],
         "type": "object",
         "properties": {
-          "movieName": {
+          "title": {
             "maxLength": 200,
             "minLength": 0,
             "type": "string"

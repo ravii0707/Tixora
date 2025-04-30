@@ -11,7 +11,7 @@ namespace Tixora.Core.DTOs
     {
         [Required(ErrorMessage = "Title is required")]
         [StringLength(200, ErrorMessage = "Title cannot exceed 200 characters")]
-        public required string MovieName { get; set; }
+        public required string Title { get; set; }
 
         [StringLength(100, ErrorMessage = "Genre cannot exceed 100 characters")]
         public string? Genre { get; set; }

@@ -11,6 +11,7 @@ namespace Tixora.API.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+ 
 
     public UsersController(IUserService userService)
     {
@@ -43,6 +44,7 @@ public class UsersController : ControllerBase
         }
 
     }
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
