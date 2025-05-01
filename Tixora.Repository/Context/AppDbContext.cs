@@ -66,8 +66,8 @@ namespace Tixora.Core.Context
                 entity.Property(e => e.IsActive).HasDefaultValue(true);
 
                 // Prevent past showtimes at database level
-                entity.ToTable(t => t.HasCheckConstraint("CHK_FutureShowtime",
-                    "CONVERT(datetime, CONVERT(varchar, ShowDate) + ' ' + ShowTime) > GETDATE()");
+               entity.ToTable(t => t.HasCheckConstraint("CHK_FutureShowtime",
+                    "CONVERT(datetime, CONVERT(varchar, ShowDate) + ' ' + ShowTime) > GETDATE()"));
 
                 // Relationship with Movie
                 entity.HasOne(d => d.Movie)
