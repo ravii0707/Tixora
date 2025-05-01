@@ -229,21 +229,7 @@ namespace Tixora.Service.Implementations
 
             return createdShowTimes;
         }
-        //public async Task<IEnumerable<string>> GetAvailableTimeSlots(DateOnly date)
-        //{
-        //    var existingShows = await _showTimeRepository.GetByDateAsync(date);
-
-        //    // Default available time slots
-        //    var allTimeSlots = new List<string> { "11:00", "14:00", "18:00", "21:00" };
-
-        //    // Filter out times that already have shows or don't meet business rules
-        //    foreach (var show in existingShows)
-        //    {
-        //        allTimeSlots.Remove(show.ShowTime);
-        //    }
-
-        //    return allTimeSlots;
-        //}
+        
 
     }
 }

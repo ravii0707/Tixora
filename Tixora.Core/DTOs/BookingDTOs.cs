@@ -11,7 +11,7 @@ public class BookingCreateDTO
     [Required(ErrorMessage = "Please select a movie for your booking.")]
     public int MovieId { get; set; }
 
-    [Range(1, 6, ErrorMessage = "You can book between 1 to 6 tickets at a time.")]
+    [Range(1, 10, ErrorMessage = "You can book between 1 to 10 tickets at a time.")]
     public int TicketCount { get; set; }
 
 }

@@ -46,6 +46,10 @@ public class MappingProfile : Profile
          .ForMember(dest => dest.IsMovieActive, opt => opt.MapFrom(src => src.Movie.IsActive))
          .ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src => src.ShowTime));
 
+        //CreateMap<TbShowTime, ShowTimeCreateDTO>() 
+        //    .IncludeMembers(src => src.Movie) 
+        //    ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src => src.ShowTime));
+
         CreateMap<ShowTimeCreateDTO, TbShowTime>();
         CreateMap<ShowTimeUpdateDTO, TbShowTime>();
 

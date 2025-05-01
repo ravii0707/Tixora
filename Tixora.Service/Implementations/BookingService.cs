@@ -106,7 +106,7 @@ namespace Tixora.Service.Implementations
                 booking.TotalAmount = CalculateTotal(bookingDto.TicketCount, showtime);
                 booking.BookingDate = DateTime.Now;
 
-                // 9. Save booking and update seats
+                // 9. Save booking and updating seats
                 var createdBooking = await _bookingRepository.AddAsync(booking);
                 showtime.AvailableSeats -= bookingDto.TicketCount;
                 await _showTimeRepository.UpdateAsync(showtime);
@@ -114,7 +114,7 @@ namespace Tixora.Service.Implementations
                 await transaction.CommitAsync();
                 _logger.LogInformation("Booking created successfully with ID: {BookingId}", createdBooking.BookingId);
 
-                // 10. Return enriched response
+                // 10. Return enhanced response
                 var response = _mapper.Map<BookingResponseDTO>(createdBooking);
                 return response;
             }
