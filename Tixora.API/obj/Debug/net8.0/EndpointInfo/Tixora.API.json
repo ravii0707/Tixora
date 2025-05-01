@@ -657,7 +657,7 @@
             "format": "int32"
           },
           "ticketCount": {
-            "maximum": 6,
+            "maximum": 10,
             "minimum": 1,
             "type": "integer",
             "format": "int32"

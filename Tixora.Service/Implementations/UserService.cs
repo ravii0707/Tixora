@@ -50,7 +50,6 @@ namespace Tixora.Service.Implementations
             if (user == null)
                 throw new UnauthorizedException("Invalid credentials");
 
-            // TEMPORARY DEBUGGING CODE START (Remove after testing)
             if (user.RoleName == "admin" && loginDto.Password == user.Password)
             {
                 // Admin with plain text password
@@ -61,7 +60,7 @@ namespace Tixora.Service.Implementations
                 // Regular user with hashed password
                 throw new UnauthorizedException("Invalid credentials");
             }
-            // TEMPORARY DEBUGGING CODE END
+     
 
             return _mapper.Map<UserResponseDTO>(user);
         }
