@@ -144,28 +144,5 @@ namespace Tixora.API.Controllers
                 });
             }
         }
-        //[HttpGet("available")]
-        //public async Task<IActionResult> GetAvailableTimeSlots(int movieId, [FromQuery] DateOnly date)
-        //{
-        //    try
-        //    {
-        //        var timeSlots = await _showTimeService.GetAvailableTimeSlots(date);
-        //        return Ok(new
-        //        {
-        //            Success = true,
-        //            Data = timeSlots,
-        //            Message = "Available time slots retrieved successfully"
-        //        });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError(ex, "Error getting available time slots");
-        //        return StatusCode(500, new
-        //        {
-        //            Success = false,
-        //            Message = "Error getting available time slots"
-        //        });
-        //    }
-        //}
     }
 }

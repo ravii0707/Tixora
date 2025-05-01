@@ -18,19 +18,22 @@ namespace Tixora.Service.Implementations
         private readonly AppDbContext _context;
         private readonly ILogger<MovieService> _logger;
         private readonly IShowTimeRepository _showTimeRepository;
+        private readonly IShowTimeService _showTimeService;
 
         public MovieService(
             IMovieRepository movieRepository,
             IMapper mapper,
             AppDbContext context,
             ILogger<MovieService> logger,
-        IShowTimeRepository showTimeRepository)
+        IShowTimeRepository showTimeRepository,
+        IShowTimeService showTimeService)
         {
             _movieRepository = movieRepository;
             _mapper = mapper;
             _context = context;
             _logger = logger;
             _showTimeRepository = showTimeRepository;
+            _showTimeService = showTimeService;
         }
 
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
@@ -182,56 +185,56 @@ namespace Tixora.Service.Implementations
                 Shows = _mapper.Map<List<ShowTimeResponseDTO>>(showTimes)
             };
         }
-        public async Task<MovieWithShowTimesResponseDTO> UpdateMovieWithShowTimesAsync(int movieId, MovieWithShowTimesUpdateDTO updateDto)
+        // Add this to your MovieService class
+        public async Task<MovieWithShowTimesResponseDTO> UpdateMovieWithShowTimesAsync(
+            int movieId,
+            MovieWithShowTimesUpdateDTO updateDto)
         {
-            // 1. Verify movie exists
-            var existingMovie = await _movieRepository.GetByIdAsync(movieId);
-            if (existingMovie == null)
+            // Start transaction
+            await _movieRepository.BeginTransactionAsync();
+
+            try
             {
-                throw new NotFoundException("Movie not found");
-            }
-
-            // 2. Update movie properties
-            _mapper.Map(updateDto.Movie, existingMovie);
-            await _movieRepository.UpdateAsync(existingMovie);
-
-            // 3. Process showtimes
-            var updatedShows = new List<ShowTimeResponseDTO>();
-
-            if (updateDto.Shows != null)
-            {
-                foreach (var showDto in updateDto.Shows)
+                // 1. Validate movie exists
+                var movie = await _movieRepository.GetByIdAsync(movieId);
+                if (movie == null)
                 {
-                    // 3a. For existing showtimes
-                    if (showDto.ShowtimeId > 0)
-                    {
-                        var existingShow = await _showTimeRepository.GetByIdAsync(showDto.ShowtimeId);
-                        if (existingShow == null || existingShow.MovieId != movieId)
-                        {
-                            throw new NotFoundException($"Showtime with ID {showDto.ShowtimeId} not found for this movie");
-                        }
+                    throw new NotFoundException("Movie not found");
+                }
 
-                        _mapper.Map(showDto, existingShow);
-                        var updatedShow = await _showTimeRepository.UpdateAsync(existingShow);
-                        updatedShows.Add(_mapper.Map<ShowTimeResponseDTO>(updatedShow));
-                    }
-                    // 3b. For new showtimes (no ID provided)
-                    else
+                // 2. Validate showtimes
+                if (updateDto.Shows != null && updateDto.Shows.Any())
+                {
+                    // Validate showtime count per day
+                    await _showTimeService.ValidateShowTimeUpdatesAsync(updateDto.Shows);
+
+                    // Update each showtime
+                    foreach (var showDto in updateDto.Shows)
                     {
-                        var newShow = _mapper.Map<TbShowTime>(showDto);
-                        newShow.MovieId = movieId;
-                        var createdShow = await _showTimeRepository.AddAsync(newShow);
-                        updatedShows.Add(_mapper.Map<ShowTimeResponseDTO>(createdShow));
+                        await _showTimeService.UpdateAsync(showDto.ShowtimeId, showDto);
                     }
                 }
-            }
 
-            // 4. Return updated data
-            return new MovieWithShowTimesResponseDTO
+                // 3. Update movie
+                _mapper.Map(updateDto.Movie, movie);
+                var updatedMovie = await _movieRepository.UpdateAsync(movie);
+
+                // Commit transaction
+                await _movieRepository.CommitTransactionAsync();
+
+                // Return updated data
+                var showTimes = await _showTimeService.GetByMovieIdAsync(movieId);
+                return new MovieWithShowTimesResponseDTO
+                {
+                    Movie = _mapper.Map<MovieResponseDTO>(updatedMovie),
+                    Shows = showTimes.ToList()
+                };
+            }
+            catch
             {
-                Movie = _mapper.Map<MovieResponseDTO>(existingMovie),
-                Shows = updatedShows
-            };
+                await _movieRepository.RollbackTransactionAsync();
+                throw;
+            }
         }
     }
 }

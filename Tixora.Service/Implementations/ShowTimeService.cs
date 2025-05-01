@@ -7,6 +7,7 @@ using Tixora.Service.Exceptions;
 using Microsoft.Extensions.Logging;
 using Tixora.Service.Interfaces;
 using System.Globalization;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tixora.Service.Implementations
 {
@@ -187,8 +188,17 @@ namespace Tixora.Service.Implementations
                     _logger.LogWarning("Movie not found with ID: {MovieId}", showTimeDto.MovieId);
                     throw new NotFoundException("Movie not found");
                 }
+                // 3. Validate showtime count for the date
 
-                // 3. Apply updates
+           var existingShows = await _showTimeRepository.GetByDateAsync(showTimeDto.ShowDate);
+            if (existingShows.Count() >= MAX_SHOWS_PER_DAY &&
+                !existingShows.Any(s => s.ShowtimeId == id))
+                    {
+                        _logger.LogWarning("Maximum shows per day reached for date: {ShowDate}", showTimeDto.ShowDate);
+                        throw new BadRequestException($"Maximum {MAX_SHOWS_PER_DAY} shows allowed per day.");
+                    }
+
+                // 4. Apply updates
                 _mapper.Map(showTimeDto, existingShowTime);
                 var updatedShowTime = await _showTimeRepository.UpdateAsync(existingShowTime);
 
@@ -201,6 +211,32 @@ namespace Tixora.Service.Implementations
                 throw new BadRequestException("Failed to update showtime. Please check your input and try again.");
             }
         }
+        public async Task ValidateShowTimeUpdatesAsync(IEnumerable<ShowTimeUpdateDTO> showTimeDtos)
+        {
+            // Group showtimes by date
+            var showTimesByDate = showTimeDtos.GroupBy(s => s.ShowDate);
+
+            foreach (var dateGroup in showTimesByDate)
+            {
+                var date = dateGroup.Key;
+
+                // Get existing showtimes for this date (excluding the ones being updated)
+                var existingShows = (await _showTimeRepository.GetByDateAsync(date))
+                    .Where(s => !dateGroup.Any(d => d.ShowtimeId == s.ShowtimeId))
+                    .ToList();
+
+                // Count of existing shows + new shows being updated
+                var totalShows = existingShows.Count + dateGroup.Count();
+
+                if (totalShows > MAX_SHOWS_PER_DAY)
+                {
+                    throw new BadRequestException(
+                        $"Date {date:yyyy-MM-dd} would have {totalShows} shows. " +
+                        $"Maximum {MAX_SHOWS_PER_DAY} shows allowed per day.");
+                }
+            }
+        }
+
 
         public async Task<IEnumerable<ShowTimeResponseDTO>> CreateMultipleShowTimesAsync(
              int movieId,

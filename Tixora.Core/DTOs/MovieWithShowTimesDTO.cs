@@ -25,6 +25,8 @@ namespace Tixora.Core.DTOs
     public class MovieWithShowTimesResponseDTO
     {
         public MovieResponseDTO Movie { get; set; }
+
+        [MaxLength(4, ErrorMessage = "Cannot have more than 4 showtimes per day")]
         public List<ShowTimeResponseDTO> Shows { get; set; }
     }
     // Showtime DTO for updates (extends create DTO with ID)

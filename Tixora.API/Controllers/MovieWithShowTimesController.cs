@@ -111,6 +111,22 @@ namespace Tixora.API.Controllers
                             .Select(e => e.ErrorMessage)
                     });
                 }
+                if (updateDto.Shows != null)
+                {
+                    // Group by date and check counts
+                    var showsByDate = updateDto.Shows.GroupBy(s => s.ShowDate);
+                    foreach (var group in showsByDate)
+                    {
+                        if (group.Count() > 4)
+                        {
+                            return BadRequest(new
+                            {
+                                Success = false,
+                                Message = $"Date {group.Key:yyyy-MM-dd} has {group.Count()} shows. Maximum 4 allowed per day."
+                            });
+                        }
+                    }
+                }
 
                 var result = await _movieService.UpdateMovieWithShowTimesAsync(movieId, updateDto);
 
