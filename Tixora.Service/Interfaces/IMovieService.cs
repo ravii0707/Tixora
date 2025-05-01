@@ -16,5 +16,7 @@ namespace Tixora.Service.Interfaces
         Task ToggleMovieStatusAsync(int id, bool isActive);
         Task<MovieWithShowTimesResponseDTO> CreateMovieWithShowTimesAsync(MovieWithShowTimesDTO movieWithShows);
         Task<MovieWithShowTimesResponseDTO> GetMovieWithShowTimesAsync(int movieId);
+        Task<MovieWithShowTimesResponseDTO> UpdateMovieWithShowTimesAsync(int movieId, MovieWithShowTimesUpdateDTO updateDto);
+
     }
 }

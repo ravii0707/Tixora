@@ -13,5 +13,7 @@ namespace Tixora.Repository.Interfaces
         
         Task<TbShowTime> UpdateAsync(TbShowTime showTime);
         Task<IEnumerable<TbShowTime>> GetByDateAsync(DateOnly date);
+        Task<bool> DeleteAsync(int id);
+
     }
 }

@@ -47,8 +47,9 @@ public class MappingProfile : Profile
          .ForMember(dest => dest.ShowTime, opt => opt.MapFrom(src => src.ShowTime));
 
         CreateMap<ShowTimeCreateDTO, TbShowTime>();
+        CreateMap<ShowTimeUpdateDTO, TbShowTime>();
 
-       
+
         // Booking mappings
         CreateMap<TbBookingHistory, BookingResponseDTO>()
           .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))

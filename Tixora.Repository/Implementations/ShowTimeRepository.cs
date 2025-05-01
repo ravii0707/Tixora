@@ -89,5 +89,18 @@ namespace Tixora.Repository.Implementations
                .Where(st => st.ShowDate == date && st.IsActive == true)
                .ToListAsync();
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            var showTime = await _context.TbShowTimes.FindAsync(id);
+            if (showTime == null)
+            {
+                return false;
+            }
+
+            _context.TbShowTimes.Remove(showTime);
+            await _context.SaveChangesAsync();
+            return true;
+        }
     }
 }

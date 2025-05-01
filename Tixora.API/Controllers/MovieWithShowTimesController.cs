@@ -93,5 +93,61 @@ namespace Tixora.API.Controllers
                 });
             }
         }
+        [HttpPut("{movieId}")]
+        public async Task<IActionResult> UpdateMovieWithShowTimes(
+            int movieId,
+            [FromBody] MovieWithShowTimesUpdateDTO updateDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(new
+                    {
+                        Success = false,
+                        Message = "Invalid request data",
+                        Errors = ModelState.Values
+                            .SelectMany(v => v.Errors)
+                            .Select(e => e.ErrorMessage)
+                    });
+                }
+
+                var result = await _movieService.UpdateMovieWithShowTimesAsync(movieId, updateDto);
+
+                return Ok(new
+                {
+                    Success = true,
+                    Data = result,
+                    Message = "Movie with showtimes updated successfully"
+                });
+            }
+            catch (NotFoundException ex)
+            {
+                _logger.LogWarning(ex, "Movie or showtime not found for update");
+                return NotFound(new
+                {
+                    Success = false,
+                    Message = ex.Message
+                });
+            }
+            catch (BadRequestException ex)
+            {
+                _logger.LogWarning(ex, "Bad request for movie with showtimes update");
+                return BadRequest(new
+                {
+                    Success = false,
+                    Message = ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error updating movie with showtimes");
+                return StatusCode(500, new
+                {
+                    Success = false,
+                    Message = "An error occurred while updating movie with showtimes"
+                });
+            }
+        }
     }
 }

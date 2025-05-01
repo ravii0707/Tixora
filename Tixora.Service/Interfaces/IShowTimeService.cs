@@ -13,5 +13,6 @@ namespace Tixora.Service.Interfaces
         Task<ShowTimeResponseDTO> UpdateAsync(int id, ShowTimeCreateDTO showTimeDto);
         //Task<IEnumerable<string>> GetAvailableTimeSlots(DateOnly date);
         Task<IEnumerable<ShowTimeResponseDTO>> CreateMultipleShowTimesAsync(int movieId, IEnumerable<ShowTimeCreateDTO> showTimeDtos);
+
     }
 }

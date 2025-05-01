@@ -90,6 +90,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Tixora.API.Controllers.MovieWithShowTimesController",
+    "Method": "UpdateMovieWithShowTimes",
+    "RelativePath": "api/movie-showtimes/{movieId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "movieId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateDto",
+        "Type": "Tixora.Core.DTOs.MovieWithShowTimesUpdateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Tixora.API.Controllers.MoviesController",
     "Method": "GetAll",
     "RelativePath": "api/movies",

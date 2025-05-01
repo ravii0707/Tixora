@@ -311,6 +311,46 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "MovieWithShowTimes"
+        ],
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesUpdateDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesUpdateDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovieWithShowTimesUpdateDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     },
     "/api/movies/{movieId}/showtimes": {
@@ -687,6 +727,25 @@
         },
         "additionalProperties": false
       },
+      "MovieWithShowTimesUpdateDTO": {
+        "required": [
+          "movie"
+        ],
+        "type": "object",
+        "properties": {
+          "movie": {
+            "$ref": "#/components/schemas/MovieCreateDTO"
+          },
+          "shows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShowTimeUpdateDTO"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ShowTimeCreateDTO": {
         "required": [
           "movieId",
@@ -716,6 +775,44 @@
           },
           "isActive": {
             "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShowTimeUpdateDTO": {
+        "required": [
+          "movieId",
+          "showDate",
+          "showTime",
+          "showtimeId"
+        ],
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "showDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "showTime": {
+            "minLength": 1,
+            "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+            "type": "string"
+          },
+          "availableSeats": {
+            "maximum": 250,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "showtimeId": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

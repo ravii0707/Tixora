@@ -182,5 +182,56 @@ namespace Tixora.Service.Implementations
                 Shows = _mapper.Map<List<ShowTimeResponseDTO>>(showTimes)
             };
         }
+        public async Task<MovieWithShowTimesResponseDTO> UpdateMovieWithShowTimesAsync(int movieId, MovieWithShowTimesUpdateDTO updateDto)
+        {
+            // 1. Verify movie exists
+            var existingMovie = await _movieRepository.GetByIdAsync(movieId);
+            if (existingMovie == null)
+            {
+                throw new NotFoundException("Movie not found");
+            }
+
+            // 2. Update movie properties
+            _mapper.Map(updateDto.Movie, existingMovie);
+            await _movieRepository.UpdateAsync(existingMovie);
+
+            // 3. Process showtimes
+            var updatedShows = new List<ShowTimeResponseDTO>();
+
+            if (updateDto.Shows != null)
+            {
+                foreach (var showDto in updateDto.Shows)
+                {
+                    // 3a. For existing showtimes
+                    if (showDto.ShowtimeId > 0)
+                    {
+                        var existingShow = await _showTimeRepository.GetByIdAsync(showDto.ShowtimeId);
+                        if (existingShow == null || existingShow.MovieId != movieId)
+                        {
+                            throw new NotFoundException($"Showtime with ID {showDto.ShowtimeId} not found for this movie");
+                        }
+
+                        _mapper.Map(showDto, existingShow);
+                        var updatedShow = await _showTimeRepository.UpdateAsync(existingShow);
+                        updatedShows.Add(_mapper.Map<ShowTimeResponseDTO>(updatedShow));
+                    }
+                    // 3b. For new showtimes (no ID provided)
+                    else
+                    {
+                        var newShow = _mapper.Map<TbShowTime>(showDto);
+                        newShow.MovieId = movieId;
+                        var createdShow = await _showTimeRepository.AddAsync(newShow);
+                        updatedShows.Add(_mapper.Map<ShowTimeResponseDTO>(createdShow));
+                    }
+                }
+            }
+
+            // 4. Return updated data
+            return new MovieWithShowTimesResponseDTO
+            {
+                Movie = _mapper.Map<MovieResponseDTO>(existingMovie),
+                Shows = updatedShows
+            };
+        }
     }
 }

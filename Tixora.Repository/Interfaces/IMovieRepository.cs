@@ -18,5 +18,6 @@ namespace Tixora.Repository.Interfaces
         Task BeginTransactionAsync();
         Task CommitTransactionAsync();
         Task RollbackTransactionAsync();
+        
     }
 }

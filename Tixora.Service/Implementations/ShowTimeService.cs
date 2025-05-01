@@ -244,5 +244,6 @@ namespace Tixora.Service.Implementations
 
         //    return allTimeSlots;
         //}
+
     }
 }

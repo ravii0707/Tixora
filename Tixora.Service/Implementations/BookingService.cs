@@ -133,7 +133,7 @@ namespace Tixora.Service.Implementations
         }
 
         public async Task<BookingResponseDTO> GetByIdAsync(int id)
-        {
+        {  
             var booking = await _bookingRepository.GetByIdAsync(id);
             if (booking == null)
             {
