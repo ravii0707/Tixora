@@ -203,17 +203,17 @@ namespace Tixora.Service.Implementations
                 }
 
                 // 2. Validate showtimes
-                if (updateDto.Shows != null && updateDto.Shows.Any())
-                {
-                    // Validate showtime count per day
-                    await _showTimeService.ValidateShowTimeUpdatesAsync(updateDto.Shows);
+                //if (updateDto.Shows != null && updateDto.Shows.Any())
+                //{
+                //    // Validate showtime count per day
+                //    await _showTimeService.ValidateShowTimeUpdatesAsync(updateDto.Shows);
 
-                    // Update each showtime
-                    foreach (var showDto in updateDto.Shows)
-                    {
-                        await _showTimeService.UpdateAsync(showDto.ShowtimeId, showDto);
-                    }
-                }
+                //    // Update each showtime
+                //    foreach (var showDto in updateDto.Shows)
+                //    {
+                //        await _showTimeService.UpdateAsync(showDto.ShowtimeId, showDto);
+                //    }
+                //}
 
                 // 3. Update movie
                 _mapper.Map(updateDto.Movie, movie);

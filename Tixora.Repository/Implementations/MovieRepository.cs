@@ -81,9 +81,6 @@ namespace Tixora.Repository.Implementations
         {
             await _context.Database.RollbackTransactionAsync();
         }
-        //public async Task<TbMovie> GetByTitleAsync(string title)
-        //{
-        //    return await _context.TbMovies.FirstOrDefaultAsync(m => m.Title == title);
-        //}
+       
     }
 }
