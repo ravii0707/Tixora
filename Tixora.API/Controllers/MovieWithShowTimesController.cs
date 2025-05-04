@@ -20,7 +20,7 @@ namespace Tixora.API.Controllers
             _logger = logger;
         }
 
-
+    
         [HttpPost]
         public async Task<IActionResult> CreateMovieWithShowTimes([FromBody] MovieWithShowTimesDTO movieWithShows)
         {
@@ -56,7 +56,7 @@ namespace Tixora.API.Controllers
                 return StatusCode(500, new
                 {
                     Success = false,
-                    Message = "An error occurred while creating movie with showtimes"
+                    Message = "you cannot add movie with past showtimes or date"
                 });
             }
         }
@@ -95,8 +95,8 @@ namespace Tixora.API.Controllers
         }
         [HttpPut("{movieId}")]
         public async Task<IActionResult> UpdateMovieWithShowTimes(
-            int movieId,
-            [FromBody] MovieWithShowTimesUpdateDTO updateDto)
+        int movieId,
+        [FromBody] MovieWithShowTimesUpdateDTO updateDto)
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Tixora.API.Controllers
                     return BadRequest(new
                     {
                         Success = false,
-                        Message = "Invalid request data",
+                        Message = "Validation failed",
                         Errors = ModelState.Values
                             .SelectMany(v => v.Errors)
                             .Select(e => e.ErrorMessage)
@@ -118,34 +118,39 @@ namespace Tixora.API.Controllers
                 {
                     Success = true,
                     Data = result,
-                    Message = "Movie with showtimes updated successfully"
+                    Message = "Movie and showtimes updated successfully"
                 });
             }
             catch (NotFoundException ex)
             {
-                _logger.LogWarning(ex, "Movie or showtime not found for update");
+                _logger.LogWarning(ex, "Resource not found");
                 return NotFound(new
                 {
                     Success = false,
-                    Message = ex.Message
+                    Message = ex.Message,
+                    Source = ex.Source // Added to identify error origin
                 });
             }
             catch (BadRequestException ex)
             {
-                _logger.LogWarning(ex, "Bad request for movie with showtimes update");
+                _logger.LogWarning(ex, "Invalid request");
                 return BadRequest(new
                 {
                     Success = false,
-                    Message = ex.Message
+                    Message = ex.Message,
+                    Field = ex.Data["Field"], // Added to pinpoint problematic field
+                    Source = "Validation"
                 });
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error updating movie with showtimes");
+                _logger.LogError(ex, "Server error");
                 return StatusCode(500, new
                 {
                     Success = false,
-                    Message = "An error occurred while updating movie with showtimes"
+                    Message = "An error occurred while updating",
+                    Details = ex.Message,
+                    Source = "Server"
                 });
             }
         }

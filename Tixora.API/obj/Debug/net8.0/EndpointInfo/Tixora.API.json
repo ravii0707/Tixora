@@ -712,6 +712,10 @@
         "additionalProperties": false
       },
       "MovieWithShowTimesDTO": {
+        "required": [
+          "movie",
+          "shows"
+        ],
         "type": "object",
         "properties": {
           "movie": {
@@ -729,7 +733,8 @@
       },
       "MovieWithShowTimesUpdateDTO": {
         "required": [
-          "movie"
+          "movie",
+          "shows"
         ],
         "type": "object",
         "properties": {
@@ -783,8 +788,7 @@
         "required": [
           "movieId",
           "showDate",
-          "showTime",
-          "showtimeId"
+          "showTime"
         ],
         "type": "object",
         "properties": {
@@ -812,7 +816,8 @@
           },
           "showtimeId": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false

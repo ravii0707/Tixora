@@ -98,7 +98,7 @@ namespace Tixora.Repository.Implementations
                 return false;
             }
 
-            _context.TbShowTimes.Remove(showTime);
+            //_context.TbShowTimes.Remove(showTime);
             await _context.SaveChangesAsync();
             return true;
         }

@@ -42,6 +42,7 @@ namespace Tixora.Core.DTOs
         public bool IsMovieActive { get; set; }
 
         // ShowTime Details
+
         public DateOnly ShowDate { get; set; }
         public string ShowTime { get; set; } = null!;
         public bool IsActive { get; set; }

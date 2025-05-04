@@ -20,7 +20,7 @@ public class MappingProfile : Profile
 
         //Deactive Mappings
         CreateMap<TbMovie, MovieResponseDTO>();
-
+        // movie with showtime mapping
         CreateMap<MovieWithShowTimesDTO, TbMovie>()
            .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Movie.Title))
            .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Movie.Genre))
@@ -63,8 +63,6 @@ public class MappingProfile : Profile
     .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount));
         CreateMap<BookingCreateDTO, TbBookingHistory>();
 
-        //moviewithshowtime
-    
 
         //// Booking mappings
         //CreateMap<TbBookingHistory, BookingResponseDTO>()

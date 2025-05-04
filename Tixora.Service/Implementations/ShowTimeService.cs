@@ -1,12 +1,16 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Tixora.Core.DTOs;
 using Tixora.Core.Entities;
 using Tixora.Repository.Interfaces;
 using Tixora.Service.Exceptions;
-using Microsoft.Extensions.Logging;
 using Tixora.Service.Interfaces;
-using System.Globalization;
 
 namespace Tixora.Service.Implementations
 {
@@ -17,7 +21,7 @@ namespace Tixora.Service.Implementations
         private readonly IMapper _mapper;
         private readonly ILogger<ShowTimeService> _logger;
 
-        // Business rule constants
+        // Business rules
         private const int MAX_DAYS_IN_ADVANCE = 4;
         private const int MAX_SHOWS_PER_DAY = 4;
         private const int MIN_GAP_BETWEEN_SHOWS_MINUTES = 180;
@@ -38,129 +42,55 @@ namespace Tixora.Service.Implementations
         {
             try
             {
-                // 1. Validate movie exists
-                _logger.LogInformation("Validating movie exists for ID: {MovieId}", showTimeDto.MovieId);
-                var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId);
-                if (movie == null)
-                {
-                    _logger.LogWarning("Movie not found with ID: {MovieId}", showTimeDto.MovieId);
-                    throw new NotFoundException("Movie not found");
-                }
+                // Validate movie exists
+                var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId)
+    ?? throw new NotFoundException("Movie", showTimeDto.MovieId);
 
-                // 2. Validate date is not in the past
-                var today = DateOnly.FromDateTime(DateTime.Today);
-                if (showTimeDto.ShowDate < today)
-                {
-                    _logger.LogWarning("Attempt to create showtime in past date: {ShowDate}", showTimeDto.ShowDate);
-                    throw new BadRequestException("Cannot create showtimes for past dates.");
-                }
+                // Validate date and time
+                ValidateShowDateTime(showTimeDto.ShowDate, showTimeDto.ShowTime);
 
-                // 3. Validate date is within allowed range (4 days)
-                if (showTimeDto.ShowDate > today.AddDays(MAX_DAYS_IN_ADVANCE))
-                {
-                    _logger.LogWarning("Attempt to create showtime beyond {MAX_DAYS_IN_ADVANCE} days: {ShowDate}",
-                        MAX_DAYS_IN_ADVANCE, showTimeDto.ShowDate);
-                    throw new BadRequestException(
-                        $"Showtime can only be scheduled up to {MAX_DAYS_IN_ADVANCE} days in advance.");
-                }
+                // Check showtime conflicts
+                await CheckShowTimeConflicts(showTimeDto.ShowDate, showTimeDto.ShowTime, showTimeDto.MovieId);
 
-                // 4. Parse and validate show time format
-                _logger.LogInformation("Parsing show time: {ShowTime}", showTimeDto.ShowTime);
-                var newShowTime = TimeOnly.ParseExact(showTimeDto.ShowTime, "HH:mm", CultureInfo.InvariantCulture);
-                var newShowDateTime = showTimeDto.ShowDate.ToDateTime(newShowTime);
+                // Create showtime
+                var showTime = _mapper.Map<TbShowTime>(showTimeDto);
+                var createdShow = await _showTimeRepository.AddAsync(showTime);
 
-                // 5. Verify show is not in the past (including time)
-                if (newShowDateTime < DateTime.Now)
-                {
-                    _logger.LogWarning("Attempt to create showtime in past: {DateTime}", newShowDateTime);
-                    throw new BadRequestException("Cannot create showtimes in the past.");
-                }
+                _logger.LogInformation("Created showtime {ShowtimeId} for movie {MovieId}",
+                    createdShow.ShowtimeId, showTimeDto.MovieId);
 
-                // 6. Get existing shows for the same date
-                _logger.LogInformation("Retrieving existing shows for date: {ShowDate}", showTimeDto.ShowDate);
-                var existingShows = await _showTimeRepository.GetByDateAsync(showTimeDto.ShowDate);
-
-                // 7. Validate maximum shows per day
-                if (existingShows.Count() >= MAX_SHOWS_PER_DAY)
-                {
-                    _logger.LogWarning("Maximum shows per day reached for date: {ShowDate}", showTimeDto.ShowDate);
-                    throw new BadRequestException($"Maximum {MAX_SHOWS_PER_DAY} shows allowed per day.");
-                }
-
-                // 8. Validate time gap between shows
-                foreach (var existingShow in existingShows)
-                {
-                    var existingShowTime = TimeOnly.ParseExact(existingShow.ShowTime, "HH:mm", CultureInfo.InvariantCulture);
-                    var existingDateTime = existingShow.ShowDate.ToDateTime(existingShowTime);
-
-                    var timeDifference = Math.Abs((newShowDateTime - existingDateTime).TotalMinutes);
-                    if (timeDifference < MIN_GAP_BETWEEN_SHOWS_MINUTES)
-                    {
-                        _logger.LogWarning("Insufficient time gap between shows. Existing: {ExistingTime}, New: {NewTime}",
-                            existingShow.ShowTime, showTimeDto.ShowTime);
-                        throw new BadRequestException(
-                            $"There must be at least {MIN_GAP_BETWEEN_SHOWS_MINUTES} minutes gap between shows. " +
-                            $"Conflict with existing show at {existingShow.ShowTime}");
-                    }
-                }
-
-                // 9. Map and create the showtime
-                _logger.LogInformation("Creating new showtime for movie {MovieId}", showTimeDto.MovieId);
-                var showTimeEntity = _mapper.Map<TbShowTime>(showTimeDto);
-                var createdShowTime = await _showTimeRepository.AddAsync(showTimeEntity);
-
-                _logger.LogInformation("Successfully created showtime with ID: {ShowtimeId}", createdShowTime.ShowtimeId);
-                return _mapper.Map<ShowTimeResponseDTO>(createdShowTime);
+                return _mapper.Map<ShowTimeResponseDTO>(createdShow);
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
-                _logger.LogError(ex, "Invalid time format provided: {ShowTime}", showTimeDto.ShowTime);
-                throw new BadRequestException("Invalid time format. Use HH:mm in 24-hour format.");
+                throw new BadRequestException("Invalid time format. Use HH:mm")
+                { Data = { ["Field"] = "ShowTime" } };
             }
             catch (DbUpdateException ex)
             {
-                _logger.LogError(ex, "Database error while creating showtime");
-                throw new BadRequestException("Failed to create showtime. Please check your input and try again.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Unexpected error creating showtime");
-                throw;
+                _logger.LogError(ex, "Database error creating showtime");
+                throw new BadRequestException("Failed to create showtime. Please try again.");
             }
         }
 
         public async Task<ShowTimeResponseDTO> GetByIdAsync(int id)
         {
-            _logger.LogInformation("Fetching showtime with ID: {ShowtimeId}", id);
-            var showTime = await _showTimeRepository.GetByIdAsync(id);
-
-            if (showTime == null)
-            {
-                _logger.LogWarning("Showtime not found with ID: {ShowtimeId}", id);
-                throw new NotFoundException("Showtime not found");
-            }
-
+            var showTime = await _showTimeRepository.GetByIdAsync(id)
+                ?? throw new NotFoundException("Showtime", id);
             return _mapper.Map<ShowTimeResponseDTO>(showTime);
         }
 
         public async Task<IEnumerable<ShowTimeResponseDTO>> GetAllAsync()
         {
-            _logger.LogInformation("Fetching all showtimes");
             var showTimes = await _showTimeRepository.GetAllAsync();
             return _mapper.Map<IEnumerable<ShowTimeResponseDTO>>(showTimes);
         }
 
         public async Task<IEnumerable<ShowTimeResponseDTO>> GetByMovieIdAsync(int movieId)
         {
-            _logger.LogInformation("Fetching showtimes for movie ID: {MovieId}", movieId);
-
-            // Validate movie exists first
-            var movie = await _movieRepository.GetByIdAsync(movieId);
-            if (movie == null)
-            {
-                _logger.LogWarning("Movie not found with ID: {MovieId}", movieId);
-                throw new NotFoundException("Movie not found");
-            }
+            // Validate movie exists
+            _ = await _movieRepository.GetByIdAsync(movieId)
+                ?? throw new NotFoundException("Movie", movieId);
 
             var showTimes = await _showTimeRepository.GetByMovieIdAsync(movieId);
             return _mapper.Map<IEnumerable<ShowTimeResponseDTO>>(showTimes);
@@ -168,67 +98,203 @@ namespace Tixora.Service.Implementations
 
         public async Task<ShowTimeResponseDTO> UpdateAsync(int id, ShowTimeCreateDTO showTimeDto)
         {
-            try
-            {
-                _logger.LogInformation("Updating showtime with ID: {ShowtimeId}", id);
+            var existingShow = await _showTimeRepository.GetByIdAsync(id)
+                ?? throw new NotFoundException("Showtime", id);
 
-                // 1. Get existing showtime
-                var existingShowTime = await _showTimeRepository.GetByIdAsync(id);
-                if (existingShowTime == null)
-                {
-                    _logger.LogWarning("Showtime not found with ID: {ShowtimeId}", id);
-                    throw new NotFoundException("Showtime not found");
-                }
+            // Validate date and time
+            ValidateShowDateTime(showTimeDto.ShowDate, showTimeDto.ShowTime);
 
-                // 2. Validate movie exists
-                var movie = await _movieRepository.GetByIdAsync(showTimeDto.MovieId);
-                if (movie == null)
-                {
-                    _logger.LogWarning("Movie not found with ID: {MovieId}", showTimeDto.MovieId);
-                    throw new NotFoundException("Movie not found");
-                }
+            // Check conflicts excluding current showtime
+            await CheckShowTimeConflicts(showTimeDto.ShowDate, showTimeDto.ShowTime,
+                showTimeDto.MovieId, id);
 
-                // 3. Apply updates
-                _mapper.Map(showTimeDto, existingShowTime);
-                var updatedShowTime = await _showTimeRepository.UpdateAsync(existingShowTime);
+            _mapper.Map(showTimeDto, existingShow);
+            var updatedShow = await _showTimeRepository.UpdateAsync(existingShow);
 
-                _logger.LogInformation("Successfully updated showtime with ID: {ShowtimeId}", id);
-                return _mapper.Map<ShowTimeResponseDTO>(updatedShowTime);
-            }
-            catch (DbUpdateException ex)
-            {
-                _logger.LogError(ex, "Database error while updating showtime with ID: {ShowtimeId}", id);
-                throw new BadRequestException("Failed to update showtime. Please check your input and try again.");
-            }
+            _logger.LogInformation("Updated showtime {ShowtimeId}", id);
+            return _mapper.Map<ShowTimeResponseDTO>(updatedShow);
         }
 
         public async Task<IEnumerable<ShowTimeResponseDTO>> CreateMultipleShowTimesAsync(
-             int movieId,
-             IEnumerable<ShowTimeCreateDTO> showTimeDtos)
+            int movieId, IEnumerable<ShowTimeCreateDTO> showTimeDtos)
         {
-            var createdShowTimes = new List<ShowTimeResponseDTO>();
+            var movie = await _movieRepository.GetByIdAsync(movieId)
+                ?? throw new NotFoundException("Movie not found", movieId);
 
-            foreach (var showTimeDto in showTimeDtos)
+            var createdShows = new List<ShowTimeResponseDTO>();
+
+            foreach (var showDto in showTimeDtos)
             {
                 try
                 {
-                    // Set the movie ID for each showtime
-                    showTimeDto.MovieId = movieId;
-
-                    // Use the existing CreateAsync method which has all the validation logic
-                    var createdShowTime = await CreateAsync(showTimeDto);
-                    createdShowTimes.Add(createdShowTime);
+                    showDto.MovieId = movieId;
+                    var createdShow = await CreateAsync(showDto);
+                    createdShows.Add(createdShow);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error creating showtime for movie {MovieId}", movieId);
-                    // Continue with other showtimes even if one fails
-                    // You might want to handle this differently based on requirements
+                    _logger.LogWarning(ex, "Failed to create showtime for movie {MovieId}", movieId);
+                    // Continue with other showtimes
                 }
             }
 
-            return createdShowTimes;
+            return createdShows;
         }
 
+        public async Task ValidateShowTimeDifference(int movieId, List<ShowTimeCreateDTO> shows)
+        {
+            var existingShows = await _showTimeRepository.GetByMovieIdAsync(movieId);
+
+            foreach (var show in shows)
+            {
+                ValidateShowDateTime(show.ShowDate, show.ShowTime);
+
+                // Check against other new shows
+                foreach (var otherShow in shows.Where(s => s != show))
+                {
+                    if (show.ShowDate == otherShow.ShowDate)
+                    {
+                        CheckTimeGap(show.ShowTime, otherShow.ShowTime,
+                            $"New showtimes at {show.ShowTime} and {otherShow.ShowTime}");
+                    }
+                }
+
+                // Check against existing shows
+                foreach (var existing in existingShows)
+                {
+                    if (show.ShowDate == existing.ShowDate)
+                    {
+                        CheckTimeGap(show.ShowTime, existing.ShowTime,
+                            $"New showtime at {show.ShowTime} conflicts with existing show");
+                    }
+                }
+            }
+        }
+
+        public async Task ValidateShowTimes(List<ShowTimeUpdateDTO> shows)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            var now = TimeOnly.FromDateTime(DateTime.Now);
+
+            foreach (var show in shows)
+            {
+                if (string.IsNullOrEmpty(show.ShowTime))
+                    throw new BadRequestException("Show time is required")
+                    { Data = { ["Field"] = "ShowTime" } };
+
+                if (!TimeOnly.TryParse(show.ShowTime, out var showTime))
+                    throw new BadRequestException("Invalid time format (HH:mm)")
+                    { Data = { ["Field"] = "ShowTime" } };
+
+                if (show.ShowDate < today)
+                    throw new BadRequestException("Cannot add shows for past dates")
+                    { Data = { ["Field"] = "ShowDate" } };
+
+                if (show.ShowDate == today && showTime < now)
+                    throw new BadRequestException("Cannot add shows for past times")
+                    { Data = { ["Field"] = "ShowTime" } };
+
+                if (show.ShowtimeId.HasValue && show.ShowtimeId.Value > 0)
+                {
+                    var showtimeId = show.ShowtimeId.Value;
+                    var existingShow = await _showTimeRepository.GetByIdAsync(showtimeId)
+                        ?? throw new NotFoundException("Showtime", showtimeId);
+
+                  
+                }
+            }
+
+            await ValidateShowTimeDifferences(shows);
+        }
+
+        public async Task ValidateShowTimeDifferences(List<ShowTimeUpdateDTO> shows)
+        {
+            var existingShows = await _showTimeRepository.GetAllAsync();
+
+            foreach (var show in shows)
+            {
+                foreach (var otherShow in shows.Where(s => s != show))
+                {
+                    if (show.ShowDate == otherShow.ShowDate)
+                    {
+                        CheckTimeGap(show.ShowTime, otherShow.ShowTime,
+                            $"Showtimes at {show.ShowTime} and {otherShow.ShowTime}");
+                    }
+                }
+
+                foreach (var existing in existingShows)
+                {
+                    if (show.ShowDate == existing.ShowDate &&
+                        show.ShowtimeId != existing.ShowtimeId)
+                    {
+                        CheckTimeGap(show.ShowTime, existing.ShowTime,
+                            $"Conflict with existing show at {existing.ShowTime}");
+                    }
+                }
+            }
+        }
+
+        #region Private Helpers
+
+        private void ValidateShowDateTime(DateOnly showDate, string showTime)
+        {
+            var today = DateOnly.FromDateTime(DateTime.Today);
+            var now = TimeOnly.FromDateTime(DateTime.Now);
+
+            if (showDate < today)
+                throw new BadRequestException("Cannot add shows for past dates")
+                { Data = { ["Field"] = "ShowDate" } };
+
+            if (!TimeOnly.TryParse(showTime, out var parsedTime))
+                throw new BadRequestException("Invalid time format (HH:mm)")
+                { Data = { ["Field"] = "ShowTime" } };
+
+            if (showDate == today && parsedTime < now)
+                throw new BadRequestException("Cannot add shows for past times")
+                { Data = { ["Field"] = "ShowTime" } };
+
+            if (showDate > today.AddDays(MAX_DAYS_IN_ADVANCE))
+                throw new BadRequestException(
+                    $"Shows can only be scheduled up to {MAX_DAYS_IN_ADVANCE} days in advance")
+                { Data = { ["Field"] = "ShowDate" } };
+        }
+
+        private async Task CheckShowTimeConflicts(DateOnly date, string time, int movieId, int? excludeShowtimeId = null)
+        {
+            var existingShows = (await _showTimeRepository.GetByDateAsync(date))
+                .Where(s => !excludeShowtimeId.HasValue || s.ShowtimeId != excludeShowtimeId.Value)
+                .ToList();
+
+            if (existingShows.Count >= MAX_SHOWS_PER_DAY)
+                throw new BadRequestException(
+                    $"Maximum {MAX_SHOWS_PER_DAY} shows allowed per day")
+                { Data = { ["Field"] = "ShowDate" } };
+
+            var newTime = TimeOnly.Parse(time);
+            foreach (var existing in existingShows)
+            {
+                var existingTime = TimeOnly.Parse(existing.ShowTime);
+                var gap = Math.Abs((newTime - existingTime).TotalMinutes);
+
+                if (gap < MIN_GAP_BETWEEN_SHOWS_MINUTES)
+                    throw new BadRequestException(
+                        $"Minimum {MIN_GAP_BETWEEN_SHOWS_MINUTES} minutes required between shows. " +
+                        $"Conflict with show at {existing.ShowTime}")
+                    { Data = { ["Field"] = "ShowTime" } };
+            }
+        }
+
+        private void CheckTimeGap(string time1, string time2, string errorContext)
+        {
+            var t1 = TimeOnly.Parse(time1);
+            var t2 = TimeOnly.Parse(time2);
+            var gap = Math.Abs((t1 - t2).TotalMinutes);
+
+            if (gap < MIN_GAP_BETWEEN_SHOWS_MINUTES)
+                throw new BadRequestException(
+                    $"{errorContext}. Minimum {MIN_GAP_BETWEEN_SHOWS_MINUTES} minutes required between shows");
+        }
+
+        }#endregion
     }
 }
