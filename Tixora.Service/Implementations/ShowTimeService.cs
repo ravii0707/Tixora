@@ -293,8 +293,8 @@ namespace Tixora.Service.Implementations
             if (gap < MIN_GAP_BETWEEN_SHOWS_MINUTES)
                 throw new BadRequestException(
                     $"{errorContext}. Minimum {MIN_GAP_BETWEEN_SHOWS_MINUTES} minutes required between shows");
+        
         }
-
-        }#endregion
+    #endregion
     }
 }
