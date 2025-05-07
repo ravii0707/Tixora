@@ -56,7 +56,7 @@ namespace Tixora.API.Controllers
                 return StatusCode(500, new
                 {
                     Success = false,
-                    Message = "you cannot add movie with past showtimes or date"
+                    Message = "..you cannot add movie with past showtimes or date"
                 });
             }
         }

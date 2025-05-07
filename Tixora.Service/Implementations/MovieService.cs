@@ -8,6 +8,7 @@ using Tixora.Core.Context;
 using Microsoft.Extensions.Logging;
 using Tixora.Service.Interfaces;
 using Tixora.Repository.Implementations;
+using Tixora.Core.Constants;
 
 namespace Tixora.Service.Implementations
 {
@@ -40,6 +41,7 @@ namespace Tixora.Service.Implementations
         {
             try
             {
+                ValidateGenre(movieDto.Genre);
                 var movie = _mapper.Map<TbMovie>(movieDto);
                 var createdMovie = await _movieRepository.AddAsync(movie);
                 _logger.LogInformation("Movie created with ID: {MovieId}", createdMovie.MovieId);
@@ -79,6 +81,7 @@ namespace Tixora.Service.Implementations
         {
             try
             {
+                ValidateGenre(movieDto.Genre);
                 var existingMovie = await _movieRepository.GetByIdAsync(id);
                 if (existingMovie == null)
                 {
@@ -145,6 +148,8 @@ namespace Tixora.Service.Implementations
 
         public async Task<MovieWithShowTimesResponseDTO> CreateMovieWithShowTimesAsync(MovieWithShowTimesDTO movieWithShows)
         {
+            //genre validating
+            ValidateGenre(movieWithShows.Movie.Genre);
             // Validate all showtimes first
             await _showTimeService.ValidateShowTimes(
                 movieWithShows.Shows.Select(s => new ShowTimeUpdateDTO
@@ -268,6 +273,18 @@ namespace Tixora.Service.Implementations
                 {
                     throw new BadRequestException("Showtime does not belong to specified movie");
                 }
+            }
+        }
+
+        private void ValidateGenre(string? genre)
+        {
+            if(!string.IsNullOrWhiteSpace(genre)&& !ValidGenres.IsValidGenre(genre))
+            {
+                var validGenres = string.Join(",", ValidGenres.Genres.OrderBy(g => g));
+                throw new BadRequestException($"Invalid gnere '{genre}'. Valid genres are :{validGenres}")
+                {
+                    Data = { ["Field"] = "Genre"}
+                };
             }
         }
     }

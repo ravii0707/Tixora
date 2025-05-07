@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tixora.Core.Validation;
 
 namespace Tixora.Core.DTOs
 {
@@ -13,10 +14,9 @@ namespace Tixora.Core.DTOs
         [StringLength(200, ErrorMessage = "Title cannot exceed 200 characters")]
         public required string Title { get; set; }
 
+        [ValidGenre(ErrorMessage = "Invalid Genre specified")]
         [StringLength(100, ErrorMessage = "Genre cannot exceed 100 characters")]
         public string? Genre { get; set; }
-
-
 
         [StringLength(50, ErrorMessage = "Language cannot exceed 50 characters")]
         public string? Language { get; set; }

@@ -92,6 +92,18 @@
         }
       }
     },
+    "/api/movies/genres": {
+      "get": {
+        "tags": [
+          "Movies"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/movies": {
       "get": {
         "tags": [
@@ -674,33 +686,165 @@
           "title": {
             "maxLength": 200,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "genre": {
             "maxLength": 100,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "nullable": true
           },
           "language": {
             "maxLength": 50,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "nullable": true
           },
           "format": {
             "maxLength": 50,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "nullable": true
           },
           "description": {
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "nullable": true
           },
           "imageUrl": {
             "maxLength": 1255,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "format": "uri",
             "nullable": true
@@ -770,6 +914,28 @@
           "showTime": {
             "minLength": 1,
             "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "availableSeats": {
@@ -803,6 +969,28 @@
           "showTime": {
             "minLength": 1,
             "pattern": "^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$",
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "availableSeats": {
@@ -831,11 +1019,55 @@
         "properties": {
           "email": {
             "minLength": 1,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "format": "email"
           },
           "password": {
             "minLength": 1,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           }
         },
@@ -854,16 +1086,82 @@
           "firstName": {
             "maxLength": 100,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "lastName": {
             "maxLength": 100,
             "minLength": 0,
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "email": {
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9._%+-]+@(gmail|outlook|yahoo|vivejaitservices|Tixora)\\.(com|org)$",
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "format": "email"
           },
@@ -871,12 +1169,56 @@
             "maxLength": 10,
             "minLength": 10,
             "pattern": "^[6-9]\\d{9}$",
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           },
           "password": {
             "maxLength": 100,
             "minLength": 8,
             "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,}$",
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string"
           }
         },
@@ -899,6 +1241,28 @@
             "readOnly": true
           },
           "summary": {
+            "enum": [
+              "Action",
+              "Adventure",
+              "Animation",
+              "Biography",
+              "Comedy",
+              "Crime",
+              "Documentary",
+              "Drama",
+              "Family",
+              "Fantasy",
+              "History",
+              "Horror",
+              "Musical",
+              "Mystery",
+              "Romance",
+              "Sci-Fi",
+              "Sport",
+              "Thriller",
+              "War",
+              "Western"
+            ],
             "type": "string",
             "nullable": true
           }

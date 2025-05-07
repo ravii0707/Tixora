@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Tixora.Core.Constants;
 using Tixora.Core.DTOs;
 using Tixora.Service.Exceptions;
 using Tixora.Service.Implementations;
@@ -19,6 +20,16 @@ public class MoviesController : ControllerBase
         _movieService = movieService;
         _logger = logger;
         _showTimeService = showTimeService;
+    }
+    [HttpGet("genres")]
+    public IActionResult GetValidGenres()
+    {
+        return Ok(new
+        {
+            Success = true,
+            Data = ValidGenres.Genres.OrderBy(g => g).ToList(),
+            Message = "List of Valid Genres"
+        });
     }
 
     [HttpGet]

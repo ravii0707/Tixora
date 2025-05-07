@@ -7,6 +7,9 @@ using Tixora.Service.Interfaces;
 using Tixora.Service;
 using Tixora.Core.Context;
 using Tixora.API.Middleware;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using Tixora.Core.Constants;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,9 +48,20 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
-// Swagger
+// Swagger 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+//Genres
+builder.Services.AddSwaggerGen(c =>
+{
+    c.MapType<string>(() => new OpenApiSchema
+    {
+        Type = "string",
+        Enum = ValidGenres.Genres.OrderBy(g => g)
+            .Select(g => new OpenApiString(g))
+            .Cast<IOpenApiAny>()
+            .ToList()
+    });
+});
 
 builder.Services.AddCors(options =>
 {
@@ -60,6 +74,7 @@ builder.Services.AddCors(options =>
         });
 });
 var app = builder.Build();
+app.UseCors("*");
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())

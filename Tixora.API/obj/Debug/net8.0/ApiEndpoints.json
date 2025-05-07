@@ -305,6 +305,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Tixora.API.Controllers.MoviesController",
+    "Method": "GetValidGenres",
+    "RelativePath": "api/movies/genres",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Tixora.API.Controllers.UsersController",
     "Method": "GetAll",
     "RelativePath": "api/user",
