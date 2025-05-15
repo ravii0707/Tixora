@@ -28,7 +28,8 @@ public class MappingProfile : Profile
            .ForMember(dest => dest.Language, opt => opt.MapFrom(src => src.Movie.Language))
            .ForMember(dest => dest.Format, opt => opt.MapFrom(src => src.Movie.Format))
            .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Movie.Description))
-           .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Movie.ImageUrl));
+           .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Movie.ImageUrl))
+           .ForMember(dest => dest.TbShowTimes, opt => opt.MapFrom(src => src.Showtimes));
 
         CreateMap<MovieCreateDTO, TbMovie>()
         .ForMember(dest => dest.MovieId, opt => opt.Ignore())
@@ -36,6 +37,11 @@ public class MappingProfile : Profile
     .ForMember(dest => dest.TbShowTimes, opt => opt.Ignore());
 
         // ShowTime mappings
+        CreateMap<ShowTimeCreateDTO, TbShowTime>()
+    .ForMember(
+        dest => dest.ShowTime,
+        opt => opt.MapFrom(src => TimeOnly.Parse(src.ShowTime)) // Parse string "HH:mm" to TimeOnly
+    );
         CreateMap<TbShowTime, ShowTimeResponseDTO>()
          .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
          .ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Movie.Genre))
@@ -65,7 +71,7 @@ public class MappingProfile : Profile
 
 
         //// Booking mappings
-        //CreateMap<TbBookingHistory, BookingResponseDTO>()
+        //CreateMap<TbBookingHistory, BookingResponseDTO>   ()
         //        .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
         //        .ForMember(dest => dest.MovieTitle, opt => opt.MapFrom(src => src.Movie.Title))
 

@@ -11,3 +11,16 @@ C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.dll
 C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\refint\Tixora.Core.dll
 C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.pdb
 C:\Tixora\Tixora\Tixora.Core\obj\Debug\net8.0\ref\Tixora.Core.dll
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.deps.json
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.dll
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\bin\Debug\net8.0\Tixora.Core.pdb
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.csproj.AssemblyReference.cache
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.AssemblyInfoInputs.cache
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.AssemblyInfo.cs
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.csproj.CoreCompileInputs.cache
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.sourcelink.json
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.dll
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\refint\Tixora.Core.dll
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\Tixora.Core.pdb
+C:\Learning\CSharp\TixoraApp\backend\Tixora\Tixora.Core\obj\Debug\net8.0\ref\Tixora.Core.dll

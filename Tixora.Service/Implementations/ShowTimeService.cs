@@ -134,7 +134,7 @@ namespace Tixora.Service.Implementations
                 catch (Exception ex)
                 {
                     _logger.LogWarning(ex, "Failed to create showtime for movie {MovieId}", movieId);
-                    // Continue with other showtimes
+                    
                 }
             }
 
