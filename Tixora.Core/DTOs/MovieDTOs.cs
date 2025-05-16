@@ -16,7 +16,10 @@ namespace Tixora.Core.DTOs
 
         [ValidGenre(ErrorMessage = "Invalid Genre specified")]
         [StringLength(100, ErrorMessage = "Genre cannot exceed 100 characters")]
-        public string? Genre { get; set; }
+        [MinLength(1, ErrorMessage = "Genre cannot be empty!!")]
+        [RegularExpression (@"\S+", ErrorMessage ="Genre cannot be empty or Space!!")]
+        public string? Genre { get; set; } =string.Empty;
+        
 
         [StringLength(50, ErrorMessage = "Language cannot exceed 50 characters")]
         public string? Language { get; set; }

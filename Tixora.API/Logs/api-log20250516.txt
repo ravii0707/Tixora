@@ -12,3 +12,55 @@
 2025-05-16 10:02:21.891 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 932.7692ms
 2025-05-16 10:02:22.541 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
 2025-05-16 10:02:22.652 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 110.2744ms
+2025-05-16 10:03:55.264 +05:30 [INF] User profile is available. Using 'C:\Users\Raviteja Kundaram\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-16 10:03:55.453 +05:30 [INF] Now listening on: https://localhost:7063
+2025-05-16 10:03:55.457 +05:30 [INF] Now listening on: http://localhost:5044
+2025-05-16 10:03:55.616 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-16 10:03:55.634 +05:30 [INF] Hosting environment: Development
+2025-05-16 10:03:55.636 +05:30 [INF] Content root path: C:\Tixora\Tixora\Tixora.API
+2025-05-16 10:04:31.969 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/index.html - null null
+2025-05-16 10:04:32.330 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/index.html - 200 null text/html;charset=utf-8 363.7612ms
+2025-05-16 10:04:32.507 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-16 10:04:32.507 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_vs/browserLink - null null
+2025-05-16 10:04:32.559 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 52.0782ms
+2025-05-16 10:04:32.629 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 121.9704ms
+2025-05-16 10:04:33.190 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-16 10:04:33.345 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 155.4749ms
+2025-05-16 10:04:37.682 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/bookings - null null
+2025-05-16 10:04:37.809 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.BookingsController.GetAll (Tixora.API)'
+2025-05-16 10:04:37.845 +05:30 [INF] Route matched with {action = "GetAll", controller = "Bookings"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.BookingsController (Tixora.API).
+2025-05-16 10:04:47.206 +05:30 [INF] Executed DbCommand (108ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[BookingID], [t].[BookingDate], [t].[MovieID], [t].[ShowtimeID], [t].[TicketCount], [t].[TotalAmount], [t].[UserID], [t0].[UserID], [t0].[Email], [t0].[FirstName], [t0].[LastName], [t0].[Password], [t0].[Phone], [t0].[RoleName], [t1].[MovieID], [t1].[Description], [t1].[Format], [t1].[Genre], [t1].[ImageURL], [t1].[IsActive], [t1].[Language], [t1].[Title], [t2].[ShowtimeID], [t2].[AvailableSeats], [t2].[IsActive], [t2].[MovieID], [t2].[ShowDate], [t2].[ShowTime]
+FROM [tb_BookingHistory] AS [t]
+INNER JOIN [tb_Users] AS [t0] ON [t].[UserID] = [t0].[UserID]
+INNER JOIN [tb_Movies] AS [t1] ON [t].[MovieID] = [t1].[MovieID]
+INNER JOIN [tb_ShowTime] AS [t2] ON [t].[ShowtimeID] = [t2].[ShowtimeID]
+2025-05-16 10:04:47.596 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[BookingResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-16 10:04:47.663 +05:30 [INF] Executed action Tixora.API.Controllers.BookingsController.GetAll (Tixora.API) in 9805.0253ms
+2025-05-16 10:04:47.668 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.BookingsController.GetAll (Tixora.API)'
+2025-05-16 10:04:47.675 +05:30 [INF] Request: GET /api/bookings | Status: 200 | Success: true | Timestamp: 2025-05-16T04:34:37.6920665Z | Duration: 9982ms
+2025-05-16 10:04:47.701 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/bookings - 200 null application/json; charset=utf-8 10019.2071ms
+2025-05-16 10:04:53.456 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/Admin/apistats - null null
+2025-05-16 10:04:53.476 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:04:53.493 +05:30 [INF] Route matched with {action = "GetApiStats", controller = "Admin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetApiStats() on controller Tixora.API.Controllers.AdminController (Tixora.API).
+2025-05-16 10:04:53.503 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-05-16 10:04:53.506 +05:30 [INF] Executed action Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API) in 5.7483ms
+2025-05-16 10:04:53.509 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:04:53.517 +05:30 [INF] Request: GET /api/Admin/apistats | Status: 200 | Success: true | Timestamp: 2025-05-16T04:34:53.4741755Z | Duration: 43ms
+2025-05-16 10:04:53.523 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/Admin/apistats - 200 null text/plain; charset=utf-8 66.4574ms
+2025-05-16 10:05:03.449 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/Admin/apistats - null null
+2025-05-16 10:05:03.485 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:05:03.487 +05:30 [INF] Route matched with {action = "GetApiStats", controller = "Admin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetApiStats() on controller Tixora.API.Controllers.AdminController (Tixora.API).
+2025-05-16 10:05:03.492 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-05-16 10:05:03.496 +05:30 [INF] Executed action Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API) in 3.7882ms
+2025-05-16 10:05:03.499 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:05:03.502 +05:30 [INF] Request: GET /api/Admin/apistats | Status: 200 | Success: true | Timestamp: 2025-05-16T04:35:03.4803805Z | Duration: 22ms
+2025-05-16 10:05:03.508 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/Admin/apistats - 200 null text/plain; charset=utf-8 58.5491ms
+2025-05-16 10:05:12.106 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/Admin/apistats - null null
+2025-05-16 10:05:12.120 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:05:12.123 +05:30 [INF] Route matched with {action = "GetApiStats", controller = "Admin"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetApiStats() on controller Tixora.API.Controllers.AdminController (Tixora.API).
+2025-05-16 10:05:12.130 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2025-05-16 10:05:12.133 +05:30 [INF] Executed action Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API) in 3.6817ms
+2025-05-16 10:05:12.137 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.AdminController.GetApiStats (Tixora.API)'
+2025-05-16 10:05:12.139 +05:30 [INF] Request: GET /api/Admin/apistats | Status: 200 | Success: true | Timestamp: 2025-05-16T04:35:12.1202634Z | Duration: 19ms
+2025-05-16 10:05:12.147 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/Admin/apistats - 200 null text/plain; charset=utf-8 41.2177ms
