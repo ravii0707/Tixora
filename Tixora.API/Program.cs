@@ -1,20 +1,24 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Tixora.Repository.Implementations;
 using Tixora.Repository.Interfaces;
 using Tixora.Service.Implementations;
 using Tixora.Service.Interfaces;
-using Tixora.Service;
 using Tixora.Core.Context;
 using Tixora.API.Middleware;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Tixora.Core.Constants;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Tixora.Service.Mpapping;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+#region Add Services to the container
+
+// Controllers and JSON options
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -22,25 +26,40 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
+//  Authentication and JWT configuration
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+        ValidAudience = builder.Configuration["Jwt:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+    };
+});
 
 
 // Database Context
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TixoraConnection")));
 
-// AutoMapper - this is the correct way to register it
+// AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-
-
-
-// Repositories - example of correct registration
+// Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
-builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-builder.Services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
 
 // Services
 builder.Services.AddScoped<IUserService, UserService>();
@@ -48,9 +67,8 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
-// Swagger 
+// Swagger with genre enum listing
 builder.Services.AddEndpointsApiExplorer();
-//Genres
 builder.Services.AddSwaggerGen(c =>
 {
     c.MapType<string>(() => new OpenApiSchema
@@ -63,30 +81,49 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// CORS for Angular frontend
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("*",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:4200") // Angular dev server
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
+    options.AddPolicy("*", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
 });
+
+#endregion
+
+//  Build the app (services are now locked and read-only)
 var app = builder.Build();
+
+#region Configure the HTTP request pipeline
+
+// Use CORS policy
 app.UseCors("*");
 
-// Configure the HTTP request pipeline
+// Swagger only in development
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+// Enable HTTPS redirection
 app.UseHttpsRedirection();
-// Add the exception handling middleware
+
+// Custom Middlewares
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<AuthorizationMiddleware>();
+
+// Use Authentication and Authorization
+app.UseAuthentication();  //
 app.UseAuthorization();
+
+// Map API controllers
 app.MapControllers();
 
+#endregion
+
+// Run the application
 app.Run();

@@ -3,7 +3,7 @@ using Microsoft.Data.SqlClient;
 using Tixora.Core.DTOs;
 using Tixora.Core.Entities;
 
-namespace Tixora.Service;
+namespace Tixora.Service.Mpapping;
 
 public class MappingProfile : Profile
 {

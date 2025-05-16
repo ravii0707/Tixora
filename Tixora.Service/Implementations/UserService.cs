@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tixora.Core.DTOs;
 using Tixora.Core.Entities;
+using Tixora.Core.Helpers;
 using Tixora.Repository.Interfaces;
 using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
@@ -16,12 +18,14 @@ namespace Tixora.Service.Implementations
     {
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
 
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper,IConfiguration configuration)
         {
             _userRepository = userRepository;
             _mapper = mapper;
+            _configuration = configuration;
         }
 
         public async Task<UserResponseDTO> RegisterAsync(UserRegisterDTO userDto)
@@ -40,7 +44,11 @@ namespace Tixora.Service.Implementations
             
 
             var createdUser = await _userRepository.AddAsync(user);
-            return _mapper.Map<UserResponseDTO>(createdUser);
+            //return _mapper.Map<UserResponseDTO>(createdUser);
+            var response = _mapper.Map<UserResponseDTO>(createdUser);
+            response.Token = JwtHelper.GenerateToken(user.Email, user.RoleName, user.UserId, _configuration);
+        
+            return response;
         }
         public async Task<UserResponseDTO> LoginAsync(UserLoginDTO loginDto)
         {
@@ -52,17 +60,26 @@ namespace Tixora.Service.Implementations
 
             if (user.RoleName == "admin" && loginDto.Password == user.Password)
             {
-                // Admin with plain text password
-                return _mapper.Map<UserResponseDTO>(user);
+                //// Admin with plain text password
+                //return _mapper.Map<UserResponseDTO>(user);
+
+                var response = _mapper.Map<UserResponseDTO>(user);
+                response.Token = JwtHelper.GenerateToken(user.Email,user.RoleName, user.UserId, _configuration);
+                return response;
+
             }
             else if (!BCrypt.Net.BCrypt.Verify(loginDto.Password, user.Password))
             {
                 // Regular user with hashed password
                 throw new UnauthorizedException("Invalid credentials");
             }
-     
 
-            return _mapper.Map<UserResponseDTO>(user);
+
+            //return _mapper.Map<UserResponseDTO>(user);
+            var userresponse = _mapper.Map<UserResponseDTO>(user);
+            userresponse.Token = JwtHelper.GenerateToken(user.Email, user.RoleName, user.UserId, _configuration);
+
+            return userresponse;
         }
         public async Task<UserResponseDTO> GetByIdAsync(int id)
         {

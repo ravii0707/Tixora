@@ -160,6 +160,8 @@ namespace Tixora.Service.Implementations
                     AvailableSeats = s.AvailableSeats
                 }).ToList()
             );
+            //edit
+            //..................
 
             // Create movie
             var movie = _mapper.Map<TbMovie>(movieWithShows.Movie);

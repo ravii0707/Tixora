@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.DTOs;
 using Tixora.Service;
 using Tixora.Service.Exceptions;
@@ -45,7 +46,7 @@ public class UsersController : ControllerBase
 
     }
 
-
+    //[Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -53,10 +54,13 @@ public class UsersController : ControllerBase
         return Ok(user);
     }
 
+    //[Authorize(Roles = "admin")]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var users = await _userService.GetAllAsync();
         return Ok(users);
     }
+    
+    
 }
