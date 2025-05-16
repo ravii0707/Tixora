@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "Tixora.API.Controllers.AdminController",
+    "Method": "GetApiStats",
+    "RelativePath": "api/Admin/apistats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Tixora.API.Controllers.BookingsController",
     "Method": "Create",
     "RelativePath": "api/bookings",

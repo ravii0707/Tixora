@@ -13,8 +13,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Tixora.Service.Mpapping;
+using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/api-log.txt", rollingInterval: RollingInterval.Day)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog(); 
 
 #region Add Services to the container
 
@@ -112,7 +122,10 @@ if (app.Environment.IsDevelopment())
 // Enable HTTPS redirection
 app.UseHttpsRedirection();
 
+
+
 // Custom Middlewares
+app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<AuthorizationMiddleware>();
 
@@ -122,6 +135,12 @@ app.UseAuthorization();
 
 // Map API controllers
 app.MapControllers();
+
+app.Lifetime.ApplicationStopping.Register(() =>
+{
+    var summary = RequestLoggingMiddleware.GetSuccessRate();
+    Log.Information("=== API SUCCESS SUMMARY ===\n{summary}", summary);
+});
 
 #endregion
 

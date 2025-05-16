@@ -1,0 +1,14 @@
+2025-05-16 10:02:19.111 +05:30 [INF] User profile is available. Using 'C:\Users\Raviteja Kundaram\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-16 10:02:19.490 +05:30 [INF] Now listening on: https://localhost:7063
+2025-05-16 10:02:19.496 +05:30 [INF] Now listening on: http://localhost:5044
+2025-05-16 10:02:19.821 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-16 10:02:20.308 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/index.html - null null
+2025-05-16 10:02:20.318 +05:30 [INF] Hosting environment: Development
+2025-05-16 10:02:20.365 +05:30 [INF] Content root path: C:\Tixora\Tixora\Tixora.API
+2025-05-16 10:02:20.850 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/index.html - 200 null text/html;charset=utf-8 542.9852ms
+2025-05-16 10:02:20.886 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-16 10:02:20.958 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_vs/browserLink - null null
+2025-05-16 10:02:21.715 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 828.7851ms
+2025-05-16 10:02:21.891 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 932.7692ms
+2025-05-16 10:02:22.541 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-16 10:02:22.652 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 110.2744ms
