@@ -8,7 +8,7 @@ namespace Tixora.API.Controllers
 {
     [Route("api/movie-showtimes")]
     [ApiController]
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public class MovieWithShowTimesController : ControllerBase
     {
         private readonly IMovieService _movieService;
@@ -24,7 +24,7 @@ namespace Tixora.API.Controllers
 
     
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> CreateMovieWithShowTimes([FromBody] MovieWithShowTimesDTO movieWithShows)
         {
             try
@@ -97,7 +97,7 @@ namespace Tixora.API.Controllers
             }
         }
         [HttpPut("{movieId}")]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> UpdateMovieWithShowTimes(
         int movieId,
         [FromBody] MovieWithShowTimesUpdateDTO updateDto)

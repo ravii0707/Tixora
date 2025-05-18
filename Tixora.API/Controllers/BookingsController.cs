@@ -9,7 +9,7 @@ namespace Tixora.API.Controllers;
 
 [Route("api/bookings")]
 [ApiController]
-[Authorize(Roles ="admin")]
+[Authorize]
 public class BookingsController : ControllerBase
 {
     private readonly IBookingService _bookingService;
@@ -73,9 +73,10 @@ public class BookingsController : ControllerBase
             });
         }
     }
-    [Authorize]
+
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetById(int id)
     {
         try
@@ -100,7 +101,7 @@ public class BookingsController : ControllerBase
     }
 
     [HttpGet("user/{userId}")]
-
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetByUserId(int userId)
     {
         try
@@ -125,7 +126,7 @@ public class BookingsController : ControllerBase
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> GetAll()
     {
         var bookings = await _bookingService.GetAllAsync();

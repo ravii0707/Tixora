@@ -6,3 +6,370 @@
 2025-05-18 12:27:30.259 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 676.699ms
 2025-05-18 12:27:30.555 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
 2025-05-18 12:27:30.679 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 124.1246ms
+2025-05-18 12:29:14.337 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:29:15.005 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:29:15.056 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:15.069 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:29:16.505 +05:30 [INF] Executed DbCommand (52ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:29:16.574 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:29:16.602 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 1498.6423ms
+2025-05-18 12:29:16.605 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:16.608 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T06:59:15.0511834Z | Duration: 1556ms
+2025-05-18 12:29:16.613 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 2275.7265ms
+2025-05-18 12:29:21.871 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:29:22.689 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:29:22.705 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:22.715 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:29:23.015 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:29:23.024 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:29:23.030 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 280.152ms
+2025-05-18 12:29:23.041 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:23.045 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T06:59:22.7026472Z | Duration: 342ms
+2025-05-18 12:29:23.060 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 1189.8201ms
+2025-05-18 12:29:31.202 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/user/login - null null
+2025-05-18 12:29:31.291 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:29:31.297 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/user/login - 204 null null 94.1499ms
+2025-05-18 12:29:31.299 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 54
+2025-05-18 12:29:31.359 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:29:31.362 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:29:31.365 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 12:29:31.396 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 12:29:31.918 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 12:29:31.921 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 550.4166ms
+2025-05-18 12:29:31.923 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:29:31.925 +05:30 [INF] Request: POST /api/user/login | Status: 200 | Success: true | Timestamp: 2025-05-18T06:59:31.3619636Z | Duration: 563ms
+2025-05-18 12:29:31.930 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 200 null application/json; charset=utf-8 630.5086ms
+2025-05-18 12:29:33.898 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:29:33.904 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:29:33.905 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:33.907 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:29:33.939 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:29:33.945 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:29:33.950 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 38.136ms
+2025-05-18 12:29:33.953 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:29:33.955 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T06:59:33.9056583Z | Duration: 49ms
+2025-05-18 12:29:33.960 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 61.6092ms
+2025-05-18 12:30:10.037 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/user/login - null null
+2025-05-18 12:30:10.045 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:10.048 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/user/login - 204 null null 11.5616ms
+2025-05-18 12:30:10.053 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 48
+2025-05-18 12:30:10.066 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:10.069 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:30:10.072 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 12:30:10.094 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 12:30:10.391 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 12:30:10.394 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 316.8388ms
+2025-05-18 12:30:10.396 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:30:10.398 +05:30 [INF] Request: POST /api/user/login | Status: 200 | Success: true | Timestamp: 2025-05-18T07:00:10.0688642Z | Duration: 330ms
+2025-05-18 12:30:10.403 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 200 null application/json; charset=utf-8 350.424ms
+2025-05-18 12:30:13.736 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:30:13.747 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:13.750 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:30:13.752 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:30:13.880 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:30:13.905 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:30:13.911 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 43.5494ms
+2025-05-18 12:30:13.914 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:30:13.916 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T07:00:13.7502362Z | Duration: 166ms
+2025-05-18 12:30:13.922 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 185.9575ms
+2025-05-18 12:30:25.768 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:30:25.773 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:25.775 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:30:25.780 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:30:25.801 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:30:25.812 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:30:25.817 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 28.0645ms
+2025-05-18 12:30:25.896 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:30:25.902 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T07:00:25.7752049Z | Duration: 127ms
+2025-05-18 12:30:25.911 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 143.4841ms
+2025-05-18 12:30:30.624 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/movies/12/toggle-status?isActive=false - null null
+2025-05-18 12:30:30.631 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:30.633 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/movies/12/toggle-status?isActive=false - 204 null null 8.47ms
+2025-05-18 12:30:30.635 +05:30 [INF] Request starting HTTP/2 PATCH https://localhost:7063/api/movies/12/toggle-status?isActive=false - null null
+2025-05-18 12:30:30.648 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:30.651 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:30:30.662 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:30:30.665 +05:30 [INF] Request: PATCH /api/movies/12/toggle-status | Status: 401 | Success: false | Timestamp: 2025-05-18T07:00:30.6497444Z | Duration: 16ms
+2025-05-18 12:30:30.675 +05:30 [INF] Request finished HTTP/2 PATCH https://localhost:7063/api/movies/12/toggle-status?isActive=false - 401 0 null 39.6953ms
+2025-05-18 12:30:35.262 +05:30 [INF] Request starting HTTP/2 PATCH https://localhost:7063/api/movies/12/toggle-status?isActive=false - null null
+2025-05-18 12:30:35.272 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:35.276 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:30:35.280 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:30:35.282 +05:30 [INF] Request: PATCH /api/movies/12/toggle-status | Status: 401 | Success: false | Timestamp: 2025-05-18T07:00:35.2757832Z | Duration: 7ms
+2025-05-18 12:30:35.288 +05:30 [INF] Request finished HTTP/2 PATCH https://localhost:7063/api/movies/12/toggle-status?isActive=false - 401 0 null 25.9501ms
+2025-05-18 12:30:39.434 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/movies/11/toggle-status?isActive=false - null null
+2025-05-18 12:30:39.444 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:39.447 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/movies/11/toggle-status?isActive=false - 204 null null 12.7856ms
+2025-05-18 12:30:39.457 +05:30 [INF] Request starting HTTP/2 PATCH https://localhost:7063/api/movies/11/toggle-status?isActive=false - null null
+2025-05-18 12:30:39.464 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:39.466 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:30:39.468 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:30:39.470 +05:30 [INF] Request: PATCH /api/movies/11/toggle-status | Status: 401 | Success: false | Timestamp: 2025-05-18T07:00:39.4660360Z | Duration: 4ms
+2025-05-18 12:30:39.474 +05:30 [INF] Request finished HTTP/2 PATCH https://localhost:7063/api/movies/11/toggle-status?isActive=false - 401 0 null 16.6649ms
+2025-05-18 12:30:43.728 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/movies/10/toggle-status?isActive=false - null null
+2025-05-18 12:30:43.736 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:43.738 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/movies/10/toggle-status?isActive=false - 204 null null 10.4844ms
+2025-05-18 12:30:43.741 +05:30 [INF] Request starting HTTP/2 PATCH https://localhost:7063/api/movies/10/toggle-status?isActive=false - null null
+2025-05-18 12:30:43.756 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:43.759 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:30:43.762 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:30:43.764 +05:30 [INF] Request: PATCH /api/movies/10/toggle-status | Status: 401 | Success: false | Timestamp: 2025-05-18T07:00:43.7590919Z | Duration: 5ms
+2025-05-18 12:30:43.768 +05:30 [INF] Request finished HTTP/2 PATCH https://localhost:7063/api/movies/10/toggle-status?isActive=false - 401 0 null 26.7769ms
+2025-05-18 12:30:56.116 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/movies/9/toggle-status?isActive=false - null null
+2025-05-18 12:30:56.121 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:56.122 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/movies/9/toggle-status?isActive=false - 204 null null 6.8044ms
+2025-05-18 12:30:56.128 +05:30 [INF] Request starting HTTP/2 PATCH https://localhost:7063/api/movies/9/toggle-status?isActive=false - null null
+2025-05-18 12:30:56.140 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:30:56.143 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:30:56.147 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:30:56.150 +05:30 [INF] Request: PATCH /api/movies/9/toggle-status | Status: 401 | Success: false | Timestamp: 2025-05-18T07:00:56.1427695Z | Duration: 7ms
+2025-05-18 12:30:56.156 +05:30 [INF] Request finished HTTP/2 PATCH https://localhost:7063/api/movies/9/toggle-status?isActive=false - 401 0 null 27.5546ms
+2025-05-18 12:36:26.870 +05:30 [INF] Request starting HTTP/2 OPTIONS https://localhost:7063/api/movie-showtimes - null null
+2025-05-18 12:36:26.909 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:26.918 +05:30 [INF] Request finished HTTP/2 OPTIONS https://localhost:7063/api/movie-showtimes - 204 null null 48.2208ms
+2025-05-18 12:36:26.923 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/movie-showtimes - application/json 615
+2025-05-18 12:36:26.970 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:26.972 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-05-18 12:36:26.975 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:36:26.977 +05:30 [INF] Request: POST /api/movie-showtimes | Status: 401 | Success: false | Timestamp: 2025-05-18T07:06:26.9724513Z | Duration: 4ms
+2025-05-18 12:36:26.985 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/movie-showtimes - 401 0 null 61.8546ms
+2025-05-18 12:36:44.562 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user - null null
+2025-05-18 12:36:44.606 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:44.616 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:36:44.619 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:36:44.621 +05:30 [INF] Request: GET /api/user | Status: 401 | Success: false | Timestamp: 2025-05-18T07:06:44.6160338Z | Duration: 5ms
+2025-05-18 12:36:44.630 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user - 401 0 null 68.267ms
+2025-05-18 12:36:46.699 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/bookings - null null
+2025-05-18 12:36:46.713 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:46.716 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-05-18 12:36:46.719 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:36:46.728 +05:30 [INF] Request: GET /api/bookings | Status: 401 | Success: false | Timestamp: 2025-05-18T07:06:46.7160396Z | Duration: 12ms
+2025-05-18 12:36:46.746 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/bookings - 401 0 null 47.2081ms
+2025-05-18 12:36:50.069 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user - null null
+2025-05-18 12:36:50.143 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:50.145 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:36:50.148 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 12:36:50.152 +05:30 [INF] Request: GET /api/user | Status: 401 | Success: false | Timestamp: 2025-05-18T07:06:50.1456180Z | Duration: 6ms
+2025-05-18 12:36:50.163 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user - 401 0 null 93.1515ms
+2025-05-18 12:36:50.765 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 12:36:50.771 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:36:50.773 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:36:50.776 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 12:36:50.905 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 12:36:50.911 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:36:50.919 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 137.4881ms
+2025-05-18 12:36:50.939 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 12:36:50.943 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T07:06:50.7733571Z | Duration: 170ms
+2025-05-18 12:36:50.949 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 184.2826ms
+2025-05-18 12:59:28.876 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 57
+2025-05-18 12:59:28.902 +05:30 [INF] CORS policy execution successful.
+2025-05-18 12:59:28.918 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:59:28.925 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 12:59:29.158 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 12:59:29.443 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 12:59:29.448 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 505.5742ms
+2025-05-18 12:59:29.452 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 12:59:29.454 +05:30 [INF] Request: POST /api/user/login | Status: 200 | Success: true | Timestamp: 2025-05-18T07:29:28.9187421Z | Duration: 535ms
+2025-05-18 12:59:29.459 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 200 null application/json; charset=utf-8 583.1331ms
+2025-05-18 12:59:48.493 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user - null null
+2025-05-18 12:59:48.507 +05:30 [INF] User authenticated: 
+2025-05-18 12:59:48.510 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 12:59:48.514 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-05-18 12:59:48.518 +05:30 [INF] Request: GET /api/user | Status: 403 | Success: false | Timestamp: 2025-05-18T07:29:48.5014075Z | Duration: 16ms
+2025-05-18 12:59:48.526 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user - 403 0 null 32.7415ms
+2025-05-18 12:59:57.853 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user/3 - null null
+2025-05-18 12:59:57.859 +05:30 [INF] User authenticated: 
+2025-05-18 12:59:57.864 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.GetById (Tixora.API)'
+2025-05-18 12:59:57.883 +05:30 [INF] Route matched with {action = "GetById", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 12:59:57.903 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 12:59:57.919 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.GetById (Tixora.API) in 25.0258ms
+2025-05-18 12:59:57.924 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.GetById (Tixora.API)'
+2025-05-18 12:59:57.930 +05:30 [INF] Request: GET /api/user/3 | Status: 403 | Success: false | Timestamp: 2025-05-18T07:29:57.8593006Z | Duration: 71ms
+2025-05-18 12:59:57.938 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user/3 - 403 null application/json; charset=utf-8 84.6815ms
+2025-05-18 13:00:17.592 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 60
+2025-05-18 13:00:17.599 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:00:17.602 +05:30 [INF] User authenticated: 
+2025-05-18 13:00:17.605 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:00:17.609 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:00:17.622 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 13:00:17.641 +05:30 [INF] Executing UnauthorizedObjectResult, writing value of type '<>f__AnonymousType9`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 13:00:17.645 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 29.9919ms
+2025-05-18 13:00:17.649 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:00:17.652 +05:30 [INF] Request: POST /api/user/login | Status: 401 | Success: false | Timestamp: 2025-05-18T07:30:17.6016850Z | Duration: 50ms
+2025-05-18 13:00:17.660 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 401 null application/json; charset=utf-8 68.5635ms
+2025-05-18 13:00:36.451 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 61
+2025-05-18 13:00:36.465 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:00:36.468 +05:30 [INF] User authenticated: 
+2025-05-18 13:00:36.470 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:00:36.473 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:00:36.487 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 13:00:36.496 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 13:00:36.499 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 20.0183ms
+2025-05-18 13:00:36.505 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:00:36.508 +05:30 [INF] Request: POST /api/user/login | Status: 200 | Success: true | Timestamp: 2025-05-18T07:30:36.4674181Z | Duration: 40ms
+2025-05-18 13:00:36.514 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 200 null application/json; charset=utf-8 63.1372ms
+2025-05-18 13:00:51.240 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user - null null
+2025-05-18 13:00:51.248 +05:30 [INF] User authenticated: 
+2025-05-18 13:00:51.250 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.GetAll (Tixora.API)'
+2025-05-18 13:00:51.259 +05:30 [INF] Route matched with {action = "GetAll", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:00:51.300 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+2025-05-18 13:00:51.315 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[Tixora.Core.DTOs.UserResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-05-18 13:00:51.322 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.GetAll (Tixora.API) in 54.3648ms
+2025-05-18 13:00:51.325 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.GetAll (Tixora.API)'
+2025-05-18 13:00:51.328 +05:30 [INF] Request: GET /api/user | Status: 200 | Success: true | Timestamp: 2025-05-18T07:30:51.2478775Z | Duration: 80ms
+2025-05-18 13:00:51.334 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user - 200 null application/json; charset=utf-8 93.9814ms
+2025-05-18 13:00:56.767 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user/3 - null null
+2025-05-18 13:00:56.774 +05:30 [INF] User authenticated: 
+2025-05-18 13:00:56.777 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.GetById (Tixora.API)'
+2025-05-18 13:00:56.785 +05:30 [INF] Route matched with {action = "GetById", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetById(Int32) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:00:56.861 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE [t].[UserID] = @__p_0
+2025-05-18 13:00:56.871 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 13:00:56.874 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.GetById (Tixora.API) in 81.4421ms
+2025-05-18 13:00:56.877 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.GetById (Tixora.API)'
+2025-05-18 13:00:56.881 +05:30 [INF] Request: GET /api/user/3 | Status: 200 | Success: true | Timestamp: 2025-05-18T07:30:56.7736222Z | Duration: 108ms
+2025-05-18 13:00:56.889 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user/3 - 200 null application/json; charset=utf-8 121.5567ms
+2025-05-18 13:06:54.709 +05:30 [INF] User profile is available. Using 'C:\Users\Raviteja Kundaram\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-18 13:06:54.995 +05:30 [INF] Now listening on: https://localhost:7063
+2025-05-18 13:06:54.999 +05:30 [INF] Now listening on: http://localhost:5044
+2025-05-18 13:06:55.104 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-18 13:06:55.106 +05:30 [INF] Hosting environment: Development
+2025-05-18 13:06:55.108 +05:30 [INF] Content root path: C:\Tixora\Tixora\Tixora.API
+2025-05-18 13:06:55.606 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/index.html - null null
+2025-05-18 13:06:55.896 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/index.html - 200 null text/html;charset=utf-8 290.7719ms
+2025-05-18 13:06:56.294 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_vs/browserLink - null null
+2025-05-18 13:06:56.294 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-18 13:06:56.311 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 16.5642ms
+2025-05-18 13:06:56.366 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 72.0953ms
+2025-05-18 13:06:57.363 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-18 13:06:57.444 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 81.0797ms
+2025-05-18 13:09:55.747 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 61
+2025-05-18 13:09:55.767 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:09:55.857 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:09:55.947 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:09:59.401 +05:30 [INF] Executed DbCommand (82ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 13:09:59.580 +05:30 [INF] Executing ObjectResult, writing value of type '<>f__AnonymousType8`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 13:09:59.597 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 3641.6639ms
+2025-05-18 13:09:59.601 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:09:59.606 +05:30 [INF] Request: POST /api/user/login | Status: 500 | Success: false | Timestamp: 2025-05-18T07:39:55.7751887Z | Duration: 3830ms
+2025-05-18 13:09:59.625 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 500 null application/json; charset=utf-8 3878.3994ms
+2025-05-18 13:10:24.915 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/user/login - application/json 61
+2025-05-18 13:10:24.927 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:10:24.932 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:10:24.936 +05:30 [INF] Route matched with {action = "Login", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(Tixora.Core.DTOs.UserLoginDTO) on controller Tixora.API.Controllers.UsersController (Tixora.API).
+2025-05-18 13:10:25.020 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__normalizedEmail_0='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [t].[UserID], [t].[Email], [t].[FirstName], [t].[LastName], [t].[Password], [t].[Phone], [t].[RoleName]
+FROM [tb_Users] AS [t]
+WHERE LOWER(LTRIM(RTRIM([t].[Email]))) = @__normalizedEmail_0
+2025-05-18 13:10:25.093 +05:30 [INF] Executing OkObjectResult, writing value of type 'Tixora.Core.DTOs.UserResponseDTO'.
+2025-05-18 13:10:25.100 +05:30 [INF] Executed action Tixora.API.Controllers.UsersController.Login (Tixora.API) in 154.0095ms
+2025-05-18 13:10:25.103 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.UsersController.Login (Tixora.API)'
+2025-05-18 13:10:25.108 +05:30 [INF] Request: POST /api/user/login | Status: 200 | Success: true | Timestamp: 2025-05-18T07:40:24.9296776Z | Duration: 178ms
+2025-05-18 13:10:25.113 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/user/login - 200 null application/json; charset=utf-8 197.7668ms
+2025-05-18 13:11:50.116 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7063/api/movie-showtimes - application/json 1024
+2025-05-18 13:11:50.124 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:11:50.307 +05:30 [INF] User authenticated: 
+2025-05-18 13:11:50.323 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MovieWithShowTimesController.CreateMovieWithShowTimes (Tixora.API)'
+2025-05-18 13:11:50.335 +05:30 [INF] Route matched with {action = "CreateMovieWithShowTimes", controller = "MovieWithShowTimes"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateMovieWithShowTimes(Tixora.Core.DTOs.MovieWithShowTimesDTO) on controller Tixora.API.Controllers.MovieWithShowTimesController (Tixora.API).
+2025-05-18 13:11:50.629 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[ShowtimeID], [t].[AvailableSeats], [t].[IsActive], [t].[MovieID], [t].[ShowDate], [t].[ShowTime], [t0].[MovieID], [t0].[Description], [t0].[Format], [t0].[Genre], [t0].[ImageURL], [t0].[IsActive], [t0].[Language], [t0].[Title]
+FROM [tb_ShowTime] AS [t]
+INNER JOIN [tb_Movies] AS [t0] ON [t].[MovieID] = [t0].[MovieID]
+2025-05-18 13:11:50.946 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@p0='?' (Size = 8000) (DbType = AnsiString), @p1='?' (Size = 50) (DbType = AnsiString), @p2='?' (Size = 100) (DbType = AnsiString), @p3='?' (Size = 1255), @p4='?' (Size = 50) (DbType = AnsiString), @p5='?' (Size = 200) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [tb_Movies] ([Description], [Format], [Genre], [ImageURL], [Language], [Title])
+OUTPUT INSERTED.[MovieID], INSERTED.[IsActive]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2025-05-18 13:11:51.014 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Date), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [tb_ShowTime] ([AvailableSeats], [IsActive], [MovieID], [ShowDate], [ShowTime])
+OUTPUT INSERTED.[ShowtimeID]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-05-18 13:11:51.037 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Date), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [tb_ShowTime] ([AvailableSeats], [IsActive], [MovieID], [ShowDate], [ShowTime])
+OUTPUT INSERTED.[ShowtimeID]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-05-18 13:11:51.046 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Date), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [tb_ShowTime] ([AvailableSeats], [IsActive], [MovieID], [ShowDate], [ShowTime])
+OUTPUT INSERTED.[ShowtimeID]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-05-18 13:11:51.057 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Date), @p4='?' (Size = 100) (DbType = AnsiString)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [tb_ShowTime] ([AvailableSeats], [IsActive], [MovieID], [ShowDate], [ShowTime])
+OUTPUT INSERTED.[ShowtimeID]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2025-05-18 13:11:51.069 +05:30 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[Tixora.Core.DTOs.MovieWithShowTimesResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 13:11:51.119 +05:30 [INF] Executed action Tixora.API.Controllers.MovieWithShowTimesController.CreateMovieWithShowTimes (Tixora.API) in 779.0024ms
+2025-05-18 13:11:51.123 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MovieWithShowTimesController.CreateMovieWithShowTimes (Tixora.API)'
+2025-05-18 13:11:51.126 +05:30 [INF] Request: POST /api/movie-showtimes | Status: 201 | Success: true | Timestamp: 2025-05-18T07:41:50.1274782Z | Duration: 999ms
+2025-05-18 13:11:51.134 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7063/api/movie-showtimes - 201 null application/json; charset=utf-8 1017.1529ms
+2025-05-18 13:11:59.661 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies - null null
+2025-05-18 13:11:59.678 +05:30 [INF] CORS policy execution successful.
+2025-05-18 13:11:59.681 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 13:11:59.715 +05:30 [INF] Route matched with {action = "GetAll", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 13:11:59.757 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+2025-05-18 13:11:59.787 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 13:11:59.797 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAll (Tixora.API) in 67.5025ms
+2025-05-18 13:11:59.799 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAll (Tixora.API)'
+2025-05-18 13:11:59.802 +05:30 [INF] Request: GET /api/movies | Status: 200 | Success: true | Timestamp: 2025-05-18T07:41:59.6817405Z | Duration: 120ms
+2025-05-18 13:11:59.807 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies - 200 null application/json; charset=utf-8 145.856ms

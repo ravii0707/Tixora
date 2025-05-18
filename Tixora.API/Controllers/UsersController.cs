@@ -48,7 +48,7 @@ public class UsersController : ControllerBase
         }
 
     }
-    [Authorize]
+    [Authorize (Roles="admin")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
