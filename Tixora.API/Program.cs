@@ -189,6 +189,7 @@ app.UseHttpsRedirection();
 // 13. Custom Middlewares
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<CustomAuthMiddleware>();
 
 // 14. Authentication & Authorization
 app.UseAuthentication();

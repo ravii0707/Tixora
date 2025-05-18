@@ -5,6 +5,7 @@ using Tixora.Core.DTOs;
 using Tixora.Service;
 using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
+using Tixora.Core.Constants;
 
 namespace Tixora.API.Controllers;
 
@@ -74,6 +75,10 @@ public class UsersController : ControllerBase
         {
             var users = await _userService.GetAllAsync();
             return Ok(users);
+        }
+        catch (UnauthorizedException ex)
+        {
+            return StatusCode(403, new { message = "Access denied. Only administrators can access all user data." });
         }
         catch (Exception ex)
         {
