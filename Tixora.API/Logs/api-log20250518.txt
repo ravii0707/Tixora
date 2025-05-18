@@ -601,3 +601,77 @@ RolesAuthorizationRequirement:User.IsInRole must be true for one of the followin
 2025-05-18 17:28:21.854 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
 2025-05-18 17:28:21.866 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 12.5105ms
 2025-05-18 17:28:21.898 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 44.1527ms
+2025-05-18 17:28:22.973 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-18 17:28:23.009 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 35.6688ms
+2025-05-18 17:28:44.088 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/index.html - null null
+2025-05-18 17:28:44.104 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/index.html - 200 null text/html;charset=utf-8 15.6526ms
+2025-05-18 17:28:44.149 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-18 17:28:44.150 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_vs/browserLink - null null
+2025-05-18 17:28:44.161 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 13.3847ms
+2025-05-18 17:28:44.183 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 34.2204ms
+2025-05-18 17:28:44.766 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-18 17:28:44.903 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 137.4322ms
+2025-05-18 17:28:50.747 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user - null null
+2025-05-18 17:28:50.809 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 17:28:50.814 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:28:50.829 +05:30 [INF] Request: GET /api/user | Status: 401 | Success: false | Timestamp: 2025-05-18T11:58:50.7609481Z | Duration: 66ms
+2025-05-18 17:28:50.839 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user - 401 null application/json 92.5062ms
+2025-05-18 17:29:03.366 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/user/5 - null null
+2025-05-18 17:29:03.383 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 17:29:03.386 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:29:03.390 +05:30 [INF] Request: GET /api/user/5 | Status: 401 | Success: false | Timestamp: 2025-05-18T11:59:03.3776604Z | Duration: 12ms
+2025-05-18 17:29:03.395 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/user/5 - 401 null application/json 28.2834ms
+2025-05-18 17:29:28.358 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/Admin/apistats - null null
+2025-05-18 17:29:28.369 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 17:29:28.372 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:29:28.373 +05:30 [INF] Request: GET /api/Admin/apistats | Status: 401 | Success: false | Timestamp: 2025-05-18T11:59:28.3670750Z | Duration: 6ms
+2025-05-18 17:29:28.380 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/Admin/apistats - 401 null application/json 22.3402ms
+2025-05-18 17:29:33.927 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/bookings - null null
+2025-05-18 17:29:33.947 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 17:29:33.949 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:29:33.952 +05:30 [INF] Request: GET /api/bookings | Status: 401 | Success: false | Timestamp: 2025-05-18T11:59:33.9459118Z | Duration: 6ms
+2025-05-18 17:29:33.960 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/bookings - 401 null application/json 34.0054ms
+2025-05-18 17:29:38.960 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movies/active - null null
+2025-05-18 17:29:38.969 +05:30 [INF] Executing endpoint 'Tixora.API.Controllers.MoviesController.GetAllActive (Tixora.API)'
+2025-05-18 17:29:39.006 +05:30 [INF] Route matched with {action = "GetAllActive", controller = "Movies"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllActive() on controller Tixora.API.Controllers.MoviesController (Tixora.API).
+2025-05-18 17:29:40.769 +05:30 [INF] Executed DbCommand (96ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[MovieID], [t].[Description], [t].[Format], [t].[Genre], [t].[ImageURL], [t].[IsActive], [t].[Language], [t].[Title]
+FROM [tb_Movies] AS [t]
+WHERE [t].[IsActive] = CAST(1 AS bit)
+2025-05-18 17:29:40.885 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[Tixora.Core.DTOs.MovieResponseDTO, Tixora.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-05-18 17:29:40.907 +05:30 [INF] Executed action Tixora.API.Controllers.MoviesController.GetAllActive (Tixora.API) in 1894.3376ms
+2025-05-18 17:29:40.913 +05:30 [INF] Executed endpoint 'Tixora.API.Controllers.MoviesController.GetAllActive (Tixora.API)'
+2025-05-18 17:29:40.917 +05:30 [INF] Request: GET /api/movies/active | Status: 200 | Success: true | Timestamp: 2025-05-18T11:59:38.9680638Z | Duration: 1949ms
+2025-05-18 17:29:40.932 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movies/active - 200 null application/json; charset=utf-8 1972.3111ms
+2025-05-18 17:29:47.580 +05:30 [INF] Request starting HTTP/2 DELETE https://localhost:7063/api/movies/4 - null null
+2025-05-18 17:29:47.594 +05:30 [INF] CORS policy execution successful.
+2025-05-18 17:29:47.597 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (admin)
+2025-05-18 17:29:47.599 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:29:47.602 +05:30 [INF] Request: DELETE /api/movies/4 | Status: 401 | Success: false | Timestamp: 2025-05-18T11:59:47.5970452Z | Duration: 5ms
+2025-05-18 17:29:47.608 +05:30 [INF] Request finished HTTP/2 DELETE https://localhost:7063/api/movies/4 - 401 null application/json 28.5378ms
+2025-05-18 17:29:53.322 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/api/movie-showtimes/1 - null null
+2025-05-18 17:29:53.334 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-05-18 17:29:53.337 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-05-18 17:29:53.339 +05:30 [INF] Request: GET /api/movie-showtimes/1 | Status: 401 | Success: false | Timestamp: 2025-05-18T11:59:53.3338883Z | Duration: 6ms
+2025-05-18 17:29:53.346 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/api/movie-showtimes/1 - 401 null application/json 24.2711ms
+2025-05-18 17:33:50.056 +05:30 [INF] User profile is available. Using 'C:\Users\Raviteja Kundaram\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-05-18 17:33:50.285 +05:30 [INF] Now listening on: https://localhost:7063
+2025-05-18 17:33:50.288 +05:30 [INF] Now listening on: http://localhost:5044
+2025-05-18 17:33:50.475 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-05-18 17:33:50.477 +05:30 [INF] Hosting environment: Development
+2025-05-18 17:33:50.479 +05:30 [INF] Content root path: C:\Tixora\Tixora\Tixora.API
+2025-05-18 17:33:50.512 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/index.html - null null
+2025-05-18 17:33:50.785 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/index.html - 200 null text/html;charset=utf-8 274.6658ms
+2025-05-18 17:33:50.865 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - null null
+2025-05-18 17:33:50.865 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/_vs/browserLink - null null
+2025-05-18 17:33:50.878 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_framework/aspnetcore-browser-refresh.js - 200 16505 application/javascript; charset=utf-8 12.5565ms
+2025-05-18 17:33:50.930 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.4915ms
+2025-05-18 17:33:52.116 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - null null
+2025-05-18 17:33:52.168 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7063/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 52.4288ms

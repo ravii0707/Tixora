@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Tixora.Core.DTOs;
 using Tixora.Service;
 using Tixora.Service.Exceptions;
 using Tixora.Service.Interfaces;
-using Tixora.Core.Constants;
 
 namespace Tixora.API.Controllers;
 
@@ -14,13 +12,11 @@ namespace Tixora.API.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly ILogger<UsersController> _logger;
+ 
 
-
-    public UsersController(IUserService userService, ILogger<UsersController> logger)
+    public UsersController(IUserService userService)
     {
         _userService = userService;
-        _logger = logger;
     }
 
     [HttpPost("register")]
@@ -49,20 +45,11 @@ public class UsersController : ControllerBase
         }
 
     }
-    [Authorize (Roles="admin")]
+
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        // Get current user's ID from claims
-        var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
-        var currentUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
-
-        // Only allow if current user is admin or accessing own profile
-        if (currentUserId != id && currentUserRole != "admin")
-        {
-            return StatusCode(403, new { message = "Holdon !!!: Only admin can access for the resource" });
-        }
-
         var user = await _userService.GetByIdAsync(id);
         return Ok(user);
     }
@@ -71,21 +58,9 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        try
-        {
-            var users = await _userService.GetAllAsync();
-            return Ok(users);
-        }
-        catch (UnauthorizedException ex)
-        {
-            return StatusCode(403, new { message = "Access denied. Only administrators can access all user data." });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error retrieving all users");
-            return StatusCode(500, new { message = "An error occurred while retrieving users" });
-        }
+        var users = await _userService.GetAllAsync();
+        return Ok(users);
     }
-
-
+    
+    
 }
