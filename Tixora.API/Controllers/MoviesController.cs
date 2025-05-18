@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tixora.Core.Constants;
 using Tixora.Core.DTOs;
 using Tixora.Service.Exceptions;
@@ -9,6 +10,7 @@ namespace Tixora.API.Controllers;
 
 [Route("api/movies")]
 [ApiController]
+[Authorize]
 public class MoviesController : ControllerBase
 {
     private readonly IMovieService _movieService;
@@ -33,6 +35,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAll()
     {
         var movies = await _movieService.GetAllAsync();
@@ -45,6 +48,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpGet("active")]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAllActive()
     {
         var movies = await _movieService.GetAllActiveAsync();
@@ -69,6 +73,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Create([FromBody] MovieCreateDTO movieDto)
     {
         var movie = await _movieService.CreateAsync(movieDto);
@@ -81,6 +86,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Update(int id, [FromBody] MovieCreateDTO movieDto)
     {
         var movie = await _movieService.UpdateAsync(id, movieDto);
@@ -93,6 +99,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpDelete("{id}")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> Delete(int id)
     {
         await _movieService.DeleteAsync(id);
@@ -100,6 +107,7 @@ public class MoviesController : ControllerBase
     }
 
     [HttpPatch("{id}/toggle-status")]
+    [Authorize(Roles = "admin")]
     public async Task<IActionResult> ToggleStatus(int id, [FromQuery] bool isActive)
     {
         await _movieService.ToggleMovieStatusAsync(id, isActive);

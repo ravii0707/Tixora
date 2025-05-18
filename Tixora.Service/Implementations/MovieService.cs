@@ -39,6 +39,7 @@ namespace Tixora.Service.Implementations
 
         public async Task<MovieResponseDTO> CreateAsync(MovieCreateDTO movieDto)
         {
+            
             try
             {
                 ValidateGenre(movieDto.Genre);

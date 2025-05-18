@@ -1,34 +1,35 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using System.Text;
 using System.Text.Json.Serialization;
+using Tixora.API.Middleware;
+using Tixora.Core.Constants;
+using Tixora.Core.Context;
+using Tixora.Core.Helpers;
 using Tixora.Repository.Implementations;
 using Tixora.Repository.Interfaces;
 using Tixora.Service.Implementations;
 using Tixora.Service.Interfaces;
-using Tixora.Core.Context;
-using Tixora.API.Middleware;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
-using Tixora.Core.Constants;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 using Tixora.Service.Mpapping;
-using Serilog;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 1. Configure Serilog for logging
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .WriteTo.File("Logs/api-log.txt", rollingInterval: RollingInterval.Day)
     .Enrich.FromLogContext()
     .CreateLogger();
 
-builder.Host.UseSerilog(); 
+builder.Host.UseSerilog();
 
-#region Add Services to the container
+#region Service Configuration
 
-// Controllers and JSON options
+// 2. Configure Controllers with JSON options
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -36,13 +37,13 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
     });
 
-//  Authentication and JWT configuration
+// 3. Configure JWT Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
+})
+.AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -55,32 +56,89 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
+
+    // For debugging purposes (optional)
+    options.Events = new JwtBearerEvents
+    {
+        OnAuthenticationFailed = context =>
+        {
+            Log.Error($"Authentication failed: {context.Exception.Message}");
+            return Task.CompletedTask;
+        },
+        OnTokenValidated = context =>
+        {
+            Log.Information($"User authenticated: {context.Principal.Identity.Name}");
+            return Task.CompletedTask;
+        }
+    };
 });
 
-
-// Database Context
+// 4. Configure Database Context
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TixoraConnection")));
 
-// AutoMapper
+// 5. Configure AutoMapper
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-// Repositories
+// 6. Register Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IShowTimeRepository, ShowTimeRepository>();
 builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
-// Services
+// 7. Register Services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IShowTimeService, ShowTimeService>();
 builder.Services.AddScoped<IBookingService, BookingService>();
 
-// Swagger with genre enum listing
+// 8. Configure Swagger with JWT support
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Tixora API",
+        Version = "v1",
+        Description = "Movie Booking System API",
+        Contact = new OpenApiContact
+        {
+            Name = "Tixora Support",
+            Email = "support@tixora.com"
+        }
+    });
+
+    // Add JWT Authentication to Swagger
+    var securityScheme = new OpenApiSecurityScheme
+    {
+        Name = "JWT Authentication",
+        Description = "Enter JWT Bearer token **_only_**",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(securityScheme.Reference.Id, securityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { securityScheme, Array.Empty<string>() }
+    });
+
+    // Include XML comments if available (optional)
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        c.IncludeXmlComments(xmlPath);
+    }
+
+    // Keep your existing genre enum configuration
     c.MapType<string>(() => new OpenApiSchema
     {
         Type = "string",
@@ -91,12 +149,12 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// CORS for Angular frontend
+// 9. Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("*", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -104,38 +162,42 @@ builder.Services.AddCors(options =>
 
 #endregion
 
-//  Build the app (services are now locked and read-only)
+// Build the application
 var app = builder.Build();
 
-#region Configure the HTTP request pipeline
+#region Middleware Pipeline Configuration
 
-// Use CORS policy
-app.UseCors("*");
-
-// Swagger only in development
+// 10. Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Tixora API v1");
+        c.DisplayRequestDuration();
+        c.EnableDeepLinking();
+        c.EnableFilter();
+    });
 }
 
-// Enable HTTPS redirection
+// 11. Enable CORS
+app.UseCors("AllowAll");
+
+// 12. Enable HTTPS redirection
 app.UseHttpsRedirection();
 
-
-
-// Custom Middlewares
+// 13. Custom Middlewares
 app.UseMiddleware<RequestLoggingMiddleware>();
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseMiddleware<AuthorizationMiddleware>();
 
-// Use Authentication and Authorization
-app.UseAuthentication();  //
+// 14. Authentication & Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
-// Map API controllers
+// 15. Map controllers
 app.MapControllers();
 
+// 16. Application lifetime events
 app.Lifetime.ApplicationStopping.Register(() =>
 {
     var summary = RequestLoggingMiddleware.GetSuccessRate();

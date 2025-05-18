@@ -1,8 +1,13 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Tixora.API",
-    "version": "1.0"
+    "title": "Tixora API",
+    "description": "Movie Booking System API",
+    "contact": {
+      "name": "Tixora Support",
+      "email": "support@tixora.com"
+    },
+    "version": "v1"
   },
   "paths": {
     "/api/Admin/apistats": {
@@ -724,7 +729,8 @@
           },
           "genre": {
             "maxLength": 100,
-            "minLength": 0,
+            "minLength": 1,
+            "pattern": "\\S+",
             "enum": [
               "Action",
               "Adventure",
@@ -1281,6 +1287,19 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "description": "Enter JWT Bearer token **_only_**",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
 }

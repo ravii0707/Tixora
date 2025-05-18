@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Tixora.API.Middleware;
 
 namespace Tixora.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles ="admin")]
     public class AdminController : ControllerBase
     {
         [HttpGet("apistats")]

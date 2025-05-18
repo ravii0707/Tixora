@@ -3,6 +3,7 @@ using Tixora.Core.DTOs;
 using Tixora.Service.Interfaces;
 using Microsoft.Extensions.Logging;
 using Tixora.Service.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tixora.API.Controllers
 {
@@ -68,6 +69,7 @@ namespace Tixora.API.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(int movieId, [FromBody] ShowTimeCreateDTO showTimeDto)
         {
             try
@@ -111,6 +113,7 @@ namespace Tixora.API.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles ="admin")]
         public async Task<IActionResult> Update(int movieId, int id, [FromBody] ShowTimeCreateDTO showTimeDto)
         {
             try

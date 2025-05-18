@@ -2,11 +2,13 @@
 using Tixora.Core.DTOs;
 using Tixora.Service.Interfaces;
 using Tixora.Service.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tixora.API.Controllers
 {
     [Route("api/movie-showtimes")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class MovieWithShowTimesController : ControllerBase
     {
         private readonly IMovieService _movieService;
@@ -22,6 +24,7 @@ namespace Tixora.API.Controllers
 
     
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateMovieWithShowTimes([FromBody] MovieWithShowTimesDTO movieWithShows)
         {
             try
@@ -94,6 +97,7 @@ namespace Tixora.API.Controllers
             }
         }
         [HttpPut("{movieId}")]
+        [Authorize]
         public async Task<IActionResult> UpdateMovieWithShowTimes(
         int movieId,
         [FromBody] MovieWithShowTimesUpdateDTO updateDto)
