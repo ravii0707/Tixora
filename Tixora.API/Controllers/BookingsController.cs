@@ -76,7 +76,7 @@ public class BookingsController : ControllerBase
 
 
     [HttpGet("{id}")]
-    [Authorize]
+    [Authorize(Roles ="admin")]
     public async Task<IActionResult> GetById(int id)
     {
         try
@@ -101,7 +101,7 @@ public class BookingsController : ControllerBase
     }
 
     [HttpGet("user/{userId}")]
-    [Authorize(Roles = "admin")]
+    [Authorize]
     public async Task<IActionResult> GetByUserId(int userId)
     {
         try

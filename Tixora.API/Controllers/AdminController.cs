@@ -6,7 +6,7 @@ namespace Tixora.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles ="admin")]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         [HttpGet("apistats")]
